@@ -2,7 +2,7 @@ FROM node:4-slim
 
 WORKDIR /usr/src/app
 
-ADD https://github.com/dorissschoi/todosailsnew/archive/master.tar.gz /tmp
+ADD https://github.com/dorissschoi/todoactiviti/archive/master.tar.gz /tmp
 
 RUN apt-get update && \
 	apt-get -y install git && \
