@@ -1,4 +1,4 @@
 #!/bin/sh
 
-./node_modules/.bin/gulp  
-node app.js 
+./node_modules/.bin/gulp --dev
+npm start
