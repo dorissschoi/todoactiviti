@@ -12,8 +12,10 @@ RUN apt-get update && \
 	rm /tmp/master.tar.gz && \
 	npm install bower coffee-script -g && \
 	npm install && \
-	bower install --allow-root
+	bower install --allow-root && \
+	node_modules/.bin/gulp 
 	
 EXPOSE 1337
         
-ENTRYPOINT ./entrypoint.sh
+#ENTRYPOINT ./entrypoint.sh
+ENTRYPOINT npm start
