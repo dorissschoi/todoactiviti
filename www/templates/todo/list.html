@@ -1,0 +1,11 @@
+<ion-header-bar class="item-input-inset">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+    <h1 class='title'>
+    	<span ng-if="ownedBy == 'me'">{{'mytask' | translate}}</span>
+    	<span ng-if="ownedBy != 'me'">{{'alltask' | translate}}</span>
+    </h1>
+      
+</ion-header-bar>
+
+<ng-include src="'templates/todo/item.html'"></ng-include>

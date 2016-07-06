@@ -1,0 +1,52 @@
+<div>
+	<label class="item item-input">
+		<i class="icon ion-search placeholder-icon"></i>
+		<input type="search" placeholder="{{'Search' | translate}}" ng-model="searchTodos">
+	</label>
+</div>
+<div class="row bar-subheader">
+	
+	<div class="col col-75 todoleftheader">
+		<a ng-click="neworder('project')" class="pointer">
+			<div>{{'Project' | translate}}</div>
+			<div>{{'TaskName' | translate}}</div>
+			<div>
+				{{'progress' | translate}},
+				<a ng-if="ownedBy != 'me'" ng-click="neworder('ownedBy')" class="pointer">{{'Assign' | translate}}</a>
+				<a ng-if="ownedBy == 'me'" ng-click="neworder('createdBy')" class="pointer">{{'createdBy' | translate}}</a>
+			</div>
+		</a>
+	</div>
+	<div class="col col-25 todorightheader">
+		<p><a ng-click="neworder('dateStart')" class="pointer">{{'datestart' | translate}}</a></p>
+	  	<p>{{'dateend' | translate}}</p>
+	</div>
+	
+</div>
+	
+<ion-content class="has-subheader">	
+	<ion-list>	
+		<ion-item class="todolist" ng-repeat="model in collection.models | todosFilter:searchTodos:collection.state.skip:collection.state.count:collection.state.limit"  on-tap="$event.stopPropagation(); read('{{model.id}}');">				
+			
+			<div class="todoitem">
+			  <div class="col col-75 listview">
+			  	<h2>{{model.project}}</h2>
+			  	<p>{{model.task}}</p><div ng-if="!model.project"></br></div>
+			  	<p>{{model.progress}}%,
+			  		<span ng-if="ownedBy != 'me'" >{{model.ownedBy.username}}</span>
+			  		<span ng-if="ownedBy == 'me'" >{{model.createdBy.username}}</span>
+			  	</p>
+			  </div>
+			  <div class="col col-25 listview">
+			  	<p class="tododate">{{model.dateStart | date: 'dd-MM-yyyy'}}</p>
+			  	<div ng-if="!model.dateStart"></br></div>
+			  	<p class="tododate">{{model.dateEnd | date: 'dd-MM-yyyy'}}</p>
+			  </div>
+			</div>
+			<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); edit(model);">Edit</ion-option-button>
+			<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">Delete</ion-option-button>
+		</ion-item>
+	</ion-list>
+	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
+	</ion-infinite-scroll>	
+</ion-content>
