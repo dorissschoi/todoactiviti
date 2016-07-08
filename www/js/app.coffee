@@ -92,7 +92,7 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					ret = new resources.ProcessdefList()
 					ret.$fetch()
 					
-		#$urlRouterProvider.otherwise('/todo/weekList?ownedBy=me&sort=project desc')				
-		$urlRouterProvider.otherwise('/todo/processdefList')
+		$urlRouterProvider.otherwise('/todo/weekList?ownedBy=me&sort=project desc')				
+		#$urlRouterProvider.otherwise('/todo/processdefList')
 		
 		

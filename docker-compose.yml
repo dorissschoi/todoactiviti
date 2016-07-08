@@ -13,7 +13,7 @@ services:
   todo:
     depends_on:
       - todo_mongo
-    image: dorissschoi/tododev
+    image: dorissschoi/todoactiviti
     container_name: todo
     hostname: todo
     ports:

@@ -6,6 +6,8 @@ module.exports =
 	#curl -X GET  --basic --user <>:<> http://localhost:8080/activiti-rest/service/repository/process-definitions
 	processdeflist: () ->
 			url = sails.config.activiti.url.processdef
+			sails.log.info "url: #{url}"
+			
 			username = sails.config.activiti.username
 			password = sails.config.activiti.password
 			param =
