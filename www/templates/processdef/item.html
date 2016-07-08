@@ -1,0 +1,15 @@
+
+	
+<ion-content class="">	
+	<ion-list>	
+		<ion-item class="processdeflist" ng-repeat="model in collection.models | todosFilter:searchTodos:collection.state.skip:collection.state.count:collection.state.limit"  on-tap="$event.stopPropagation(); read('{{model.id}}');">				
+			  
+			  	{{model.id}},{{model.name}}			  
+			  
+			<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); edit(model);">Edit</ion-option-button>
+			<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">Delete</ion-option-button>
+		</ion-item>
+	</ion-list>
+	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
+	</ion-infinite-scroll>	
+</ion-content>

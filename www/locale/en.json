@@ -35,6 +35,6 @@
 	"dateexpect":		"Due date",
 	"datestart":		"Start date",
 	"dateend":			"End date",
-	"createdBy":		"Created By"
-			
+	"createdBy":		"Created By",
+	"processdef":		"Process definition"		
 }

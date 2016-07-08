@@ -3,4 +3,10 @@ module.exports =
 		'GET /api/todo':
 			controller:		'TodoController'
 			action:			'find'
+
+		'GET /api/processdef':
+			controller:		'ProcessdefController'
+			action:			'find'
+
+
 												

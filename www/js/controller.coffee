@@ -8,6 +8,17 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		$scope.env = env
 		$scope.navigator = navigator
 
+	.controller 'ListProcessdefCtrl', ($rootScope, $stateParams, $scope, collection, $location) ->
+		_.extend $scope,
+			
+			collection: collection
+			
+			loadMore: ->
+				collection.$fetch()
+					.then ->
+						$scope.$broadcast('scroll.infiniteScrollComplete')
+					.catch alert
+
 	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, sortOrder) ->
 		_.extend $scope,
 			ownedBy: ownedBy

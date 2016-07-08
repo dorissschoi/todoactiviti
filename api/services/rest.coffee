@@ -12,6 +12,21 @@ options =
 	ca:			ca
 		
 module.exports =
+
+	basicget: (url, username, password) ->
+		new Promise (fulfill, reject) ->
+			auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
+			opts = 
+				headers:
+					Authorization:	auth
+					
+			#sails.log.info "opts: #{JSON.stringify(opts.headers)}"
+			sails.log.info "url: #{url}"
+			http.get url, opts, (err, res) ->
+				if err
+					return reject err
+				fulfill res
+			
 	get: (token, url) ->
 		new Promise (fulfill, reject) ->
 			opts = _.extend options, sails.config.http.opts,

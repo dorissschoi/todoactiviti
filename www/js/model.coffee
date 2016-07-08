@@ -43,9 +43,23 @@ angular.module 'starter.model', ['PageableAR']
 
 			model: User
 			
-			$urlRoot: "api/user/"		
-					
+			$urlRoot: "api/user/"
+			
+						
+		class Processdef extends pageableAR.Model
+			$idAttribute: 'id'
+			
+			$urlRoot: "api/processdef/"
+				
+		# ProcessdefList
+		class ProcessdefList extends pageableAR.PageableCollection
+			model: Processdef
+		
+			$urlRoot: "api/processdef/"
+								
 		Todo:		Todo
 		TodoList:	TodoList
 		User:		User
 		UserList:	UserList
+		Processdef:	Processdef
+		ProcessdefList: ProcessdefList

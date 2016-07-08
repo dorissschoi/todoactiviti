@@ -35,5 +35,6 @@
 	"dateexpect":	"預期日期",
 	"datestart":	"開始日期",
 	"dateend":		"完成日期",
-	"createdBy":	"設定"
+	"createdBy":	"設定",
+	"processdef":	"流程定義"
 }
