@@ -36,5 +36,6 @@
 	"datestart":		"Start date",
 	"dateend":			"End date",
 	"createdBy":		"Created By",
-	"processdef":		"Process definition"		
+	"processdef":		"Process definition",
+	"runningprocins":	"Running process instance"		
 }

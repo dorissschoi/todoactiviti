@@ -8,17 +8,24 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		$scope.env = env
 		$scope.navigator = navigator
 
-	.controller 'ListProcessdefCtrl', ($rootScope, $stateParams, $scope, collection, $location) ->
+	.controller 'ListProcessdefCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources) ->
 		_.extend $scope,
 			
 			collection: collection
 			
-			loadMore: ->
-				collection.$fetch()
-					.then ->
-						$scope.$broadcast('scroll.infiniteScrollComplete')
-					.catch alert
-
+			# save model backend call post
+			startprocdef: (startitem) ->
+				item = new resources.Processdef
+					processdefID: startitem.id
+				item.$save()
+					
+	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources) ->
+		_.extend $scope,
+			
+			collection: collection
+			
+		
+			
 	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, sortOrder) ->
 		_.extend $scope,
 			ownedBy: ownedBy

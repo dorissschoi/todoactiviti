@@ -7,48 +7,55 @@ services:
     ports:
       - 27017
     volumes:
-      - /home/doris/todoactiviti/todo/data:/data/db
+      - ${COMPOSEROOT}/todo/data:/data/db
     command: mongod --directoryperdb 
     
   todo:
     depends_on:
+      - activiti_mysql
+      - activiti_server
       - todo_mongo
-      - activiti-server
     image: dorissschoi/todoactiviti
     container_name: todo
     hostname: todo
     ports:
-      - 1337:1337
+      - 1337
     volumes:
-      - ./config/docker/development.coffee:/usr/src/app/config/env/development.coffee
+      - ${COMPOSEROOT}/todo/conf/server.coffee:/usr/src/app/config/env/development.coffee
+      - ${COMPOSEROOT}/todo/conf/client.coffee:/usr/src/app/www/js/config/development.coffee
+      - ${COMPOSEROOT}/todo/conf/entrypoint.sh:/usr/src/app/entrypoint.sh
       - /etc/ssl/certs:/etc/ssl/certs
       - /usr/local/share/ca-certificates:/usr/local/share/ca-certificates
       
-  activiti-mysql:
-    hostname: activiti-mysql
-    container_name: activiti-mysql
+        
+  activiti_mysql:
+    hostname: activiti_mysql
+    container_name: activiti_mysql
     image: sameersbn/mysql:latest
     volumes:
-      - /home/doris/activiti-mysql/data:/var/lib/mysql
+      - ${COMPOSEROOT}/todo/mysqldata:/var/lib/mysql
+      - /etc/localtime:/etc/localtime
     environment:
-      - DB_NAME=activiti_production
-      - DB_USER=activiti
-      - DB_PASS=aaa123aa
-  
-  activiti-server:
-    hostname: activiti-server
-    container_name: activiti-server
+      - DB_NAME=
+      - DB_USER=
+      - DB_PASS=     
+      
+  activiti_server:
+    hostname: activiti_server
+    container_name: activiti_server
     image: dorissschoi/activiti:latest
+    volumes:
+      - /etc/localtime:/etc/localtime
     links:
-      - activiti-mysql:mysql
+      - activiti_mysql:mysql
     ports:
-      - 8080:8080  
+      - 8080  
     # for version 1 link env var
     environment:
       - DB_TYPE=mysql
-      - DB_HOST=activiti-mysql
+      - DB_HOST=activiti_mysql
       - DB_PORT=3306
       # support for linked sameersbn/mysql image
-      - DB_USER=activiti
-      - DB_PASS=aaa123aa
-      - DB_NAME=activiti_production
+      - DB_NAME=
+      - DB_USER=
+      - DB_PASS=       

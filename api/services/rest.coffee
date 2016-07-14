@@ -13,20 +13,34 @@ options =
 		
 module.exports =
 
-	basicget: (url, username, password) ->
+	basicget: (url) ->
 		new Promise (fulfill, reject) ->
-			auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
+			auth = "Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
 			opts = 
 				headers:
 					Authorization:	auth
-					
-			#sails.log.info "opts: #{JSON.stringify(opts.headers)}"
-			sails.log.info "url: #{url}"
+
 			http.get url, opts, (err, res) ->
 				if err
 					return reject err
 				fulfill res
-			
+
+	basicpost: (url, processdefID) ->
+		new Promise (fulfill, reject) ->
+			auth = "Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
+			data = 
+				processDefinitionId: processdefID
+			opts = 
+				headers:
+					Authorization: 	auth
+					'Content-Type': 'application/json'
+				json:		true
+				
+			http.post url, data, opts, (err, res) ->
+				if err
+					return reject err
+				fulfill res
+							
 	get: (token, url) ->
 		new Promise (fulfill, reject) ->
 			opts = _.extend options, sails.config.http.opts,

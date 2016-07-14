@@ -8,5 +8,7 @@ module.exports =
 			controller:		'ProcessdefController'
 			action:			'find'
 
-
+		'GET /api/processins':
+			controller:		'ProcessinsController'
+			action:			'find'
 												

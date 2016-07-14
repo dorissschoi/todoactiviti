@@ -91,8 +91,22 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				collection: (resources) ->
 					ret = new resources.ProcessdefList()
 					ret.$fetch()
+
+		$stateProvider.state 'app.listProcessins',
+			url: "/todo/processinsList"
+			cache: false
+			views:
+				'menuContent':
+					templateUrl: "templates/processins/list.html"
+					controller: 'ListProcessinsCtrl'
+			resolve:
+				resources: 'resources'
+				collection: (resources) ->
+					ret = new resources.ProcessinsList()
+					ret.$fetch()		
 					
 		$urlRouterProvider.otherwise('/todo/weekList?ownedBy=me&sort=project desc')				
 		#$urlRouterProvider.otherwise('/todo/processdefList')
+		
 		
 		

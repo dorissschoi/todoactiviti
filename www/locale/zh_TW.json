@@ -36,5 +36,6 @@
 	"datestart":	"開始日期",
 	"dateend":		"完成日期",
 	"createdBy":	"設定",
-	"processdef":	"流程定義"
+	"processdef":	"流程定義",
+	"runningprocins":	"已開始流程"
 }

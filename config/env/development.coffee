@@ -1,4 +1,5 @@
 agent = require 'https-proxy-agent'
+activitiurl = "http://172.22.0.3:8080/activiti-rest/service"
 
 module.exports =
 	hookTimeout:	400000
@@ -7,7 +8,10 @@ module.exports =
 	
 	activiti:
 		url:
-			processdef: "http://localhost:8080/activiti-rest/service/repository/process-definitions?category=http://www.activiti.org/processdef"
+			startprocessins: "#{activitiurl}/runtime/process-instances"
+			processdeflist: "#{activitiurl}/repository/process-definitions?category=http://www.activiti.org/processdef"
+			runninglist: "#{activitiurl}/runtime/tasks"
+			
 		username:	'kermit'
 		password:	'kermit'
 		
@@ -31,7 +35,6 @@ module.exports =
 		mongo:
 			adapter:	'sails-mongo'
 			driver:		'mongodb'
-			#url: 'mongodb://username:password@db2,db3,db4/dbname?replicaSet=rs0' #prd 
 			url: 'mongodb://todosailsrw:pass1234@localhost/todosails' #dev
 		
 	im:
