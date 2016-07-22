@@ -25,11 +25,10 @@ module.exports =
 					return reject err
 				fulfill res
 
-	basicpost: (url, processdefID) ->
+	basicpost: (url, data) ->
 		new Promise (fulfill, reject) ->
 			auth = "Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
-			data = 
-				processDefinitionId: processdefID
+				
 			opts = 
 				headers:
 					Authorization: 	auth

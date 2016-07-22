@@ -12,3 +12,5 @@ module.exports =
 			'*':		false
 			find:		true
 			findOne:	['isAuth', 'user/me']
+		ProcessdefController:
+			create: 	['isAuth', 'setCreatedBy' ]			

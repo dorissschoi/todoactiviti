@@ -20,14 +20,21 @@ module.exports =
 						reject new Error "Get Activiti - process definitions failed"
 				.catch reject
 
-	#promise to get activiti process instance
+	#promise to start activiti process instance
 	#curl  -H "Content-Type: application/json" -X POST -d "{\"processDefinitionId\":\"$1\"}" ${url}/runtime/process-instances | python -mjson.tool				
-	startprocessins: (processdefID) ->
+	startprocessins: (processdefID, requsername) ->
 		url = sails.config.activiti.url.startprocessins
 		sails.log.info "url: #{url}"
 		
+		data = 
+			processDefinitionId: processdefID
+			variables: [
+				name: 'createdby'
+				value: requsername	
+			]		
+		
 		new Promise (resolve, reject) ->
-			sails.services.rest.basicpost "#{url}", "#{processdefID}"
+			sails.services.rest.basicpost "#{url}", data
 				.then (res) ->
 					if res.statusCode == 201
 						resolve res.body
