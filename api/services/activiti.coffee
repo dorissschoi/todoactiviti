@@ -22,7 +22,7 @@ module.exports =
 
 	#promise to start activiti process instance
 	#curl  -H "Content-Type: application/json" -X POST -d "{\"processDefinitionId\":\"$1\"}" ${url}/runtime/process-instances | python -mjson.tool				
-	startprocessins: (processdefID, requsername) ->
+	startprocessins: (processdefID) ->
 		url = sails.config.activiti.url.startprocessins
 		sails.log.info "url: #{url}"
 		
@@ -30,7 +30,7 @@ module.exports =
 			processDefinitionId: processdefID
 			variables: [
 				name: 'createdby'
-				value: requsername	
+				value: 'dorissschoi'	
 			]		
 		
 		new Promise (resolve, reject) ->

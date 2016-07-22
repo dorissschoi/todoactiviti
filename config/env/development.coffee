@@ -1,5 +1,5 @@
 agent = require 'https-proxy-agent'
-activitiurl = "http://172.22.0.3:8080/activiti-rest/service"
+activitiurl = "http://localhost:8080/activiti-rest/service"
 
 module.exports =
 	hookTimeout:	400000

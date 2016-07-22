@@ -16,7 +16,7 @@ module.exports =
 		Model = actionUtil.parseModel(req)
 		data = actionUtil.parseValues(req)
 		
-		activiti.startprocessins(data.processdefID, req.user.username)
+		activiti.startprocessins(data.processdefID)
 			.then (result) ->
 				res.ok(result)
 			.catch res.serverError
