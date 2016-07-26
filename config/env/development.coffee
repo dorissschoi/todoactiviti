@@ -1,19 +1,9 @@
 agent = require 'https-proxy-agent'
-activitiurl = "http://localhost:8080/activiti-rest/service"
 
 module.exports =
 	hookTimeout:	400000
 	
 	port:			1337
-	
-	activiti:
-		url:
-			startprocessins: "#{activitiurl}/runtime/process-instances"
-			processdeflist: "#{activitiurl}/repository/process-definitions?category=http://www.activiti.org/processdef"
-			runninglist: "#{activitiurl}/runtime/tasks"
-			
-		username:	'kermit'
-		password:	'kermit'
 		
 	oauth2:
 		verifyURL:			"https://mob.myvnc.com/org/oauth2/verify/"
