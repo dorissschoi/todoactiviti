@@ -43,6 +43,7 @@
     "jquery-deparam": "^0.4.2",
     "lodash": "^3.8.0",
     "log4js": "^0.6.29",
+    "mocha": "^2.5.3",
     "needle": "^0.11.0",
     "node-schedule": "^0.6.0",
     "parsed-url": "0.0.0",
