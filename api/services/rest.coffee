@@ -13,26 +13,12 @@ options =
 		
 module.exports =
 
-	basicget: (url, opts) ->
+	get: (token, url, opts) ->
 		new Promise (fulfill, reject) ->
-			http.get url, opts, (err, res) ->
-				if err
-					return reject err
-				fulfill res
-
-	basicpost: (url, opts, data) ->
-		new Promise (fulfill, reject) ->
-			http.post url, data, opts, (err, res) ->
-				if err
-					return reject err
-				fulfill res
-							
-	get: (token, url) ->
-		new Promise (fulfill, reject) ->
-			opts = _.extend options, sails.config.http.opts,
-				headers:
-					Authorization:	"Bearer #{token}"
-					
+			if _.isUndefined opts
+				opts = _.extend options, sails.config.http.opts,
+					headers:
+						Authorization:	"Bearer #{token}"
 			optsGet = _.omit opts, 'Content-Type', 'username', 'password'		
 			
 			#sails.log "optsGet: " + JSON.stringify optsGet
@@ -42,11 +28,13 @@ module.exports =
 					return reject err
 				fulfill res
 				
-	post: (token, url, data) ->
+	post: (token, url, opts, data) ->
 		new Promise (fulfill, reject) ->
-			opts = _.extend options, sails.config.http.opts,
-				headers:
-					Authorization:	"Bearer #{token}"
+			if _.isUndefined opts
+				opts = _.extend options, sails.config.http.opts,
+					headers:
+						Authorization:	"Bearer #{token}"
+						
 			http.post url, data, opts, (err, res) ->
 				if err
 					return reject err

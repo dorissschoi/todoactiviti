@@ -18,7 +18,10 @@ module.exports =
 
 		notes:
 			type: 'string'
-
+		
+		url:
+			type: 'string'
+			
 		dateStart:
 			type: 'datetime'
 			defaultsTo: null			

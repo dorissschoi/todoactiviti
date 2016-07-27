@@ -9,7 +9,7 @@
 	<div class="col col-75 todoleftheader">
 		<a ng-click="neworder('project')" class="pointer">
 			<div>{{'Project' | translate}}</div>
-			<div>{{'TaskName' | translate}}</div>
+			<div>{{'TaskName' | translate}},{{'Url' | translate}}</div>
 			<div>
 				{{'progress' | translate}},
 				<a ng-if="ownedBy != 'me'" ng-click="neworder('ownedBy')" class="pointer">{{'Assign' | translate}}</a>
@@ -31,7 +31,10 @@
 			<div class="todoitem">
 			  <div class="col col-75 listview">
 			  	<h2>{{model.project}}</h2>
-			  	<p>{{model.task}}</p><div ng-if="!model.project"></br></div>
+			  	<div ng-if="!model.project"></br></div>
+			  	<p>{{model.task}}
+			  	<a ng-if="model.url" href="{{model.url}}" target="_blank">Click</a></p>
+			  	
 			  	<p>{{model.progress}}%,
 			  		<span ng-if="ownedBy != 'me'" >{{model.ownedBy.username}}</span>
 			  		<span ng-if="ownedBy == 'me'" >{{model.createdBy.username}}</span>

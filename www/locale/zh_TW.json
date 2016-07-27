@@ -37,5 +37,6 @@
 	"dateend":		"完成日期",
 	"createdBy":	"設定",
 	"processdef":	"流程定義",
-	"runningprocins":	"已開始流程"
+	"runningprocins":	"已開始流程",
+	"url":			"網址"
 }

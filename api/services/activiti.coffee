@@ -11,16 +11,10 @@ module.exports =
 			json: true
 		
 		new Promise (resolve, reject) ->
-			if method =="get"
-				sails.services.rest.basicget url, opts
-					.then (res) ->
-						resolve res
-					.catch reject
-			else
-				sails.services.rest.basicpost url, opts, data
-					.then (res) ->
-						resolve res
-					.catch reject
+			sails.services.rest[method] {}, url, opts, data
+				.then (res) ->
+					resolve res
+				.catch reject
 				
 	getlist: (url) ->
 		@req "get", url
