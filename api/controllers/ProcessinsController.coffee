@@ -3,12 +3,11 @@ actionUtil = require 'sails/lib/hooks/blueprints/actionUtil'
 
 module.exports =
 	find: (req, res) ->
-		activiti.getlist(sails.config.activiti.url.runninglist)
+		activiti.req 'get', sails.config.activiti.url.runninglist
 			.then (result) ->
-				#sails.log.info "res: #{JSON.stringify(result)}"
 				val =
-					count:		result.total
-					results:	result.data
+					count:		result.body.total
+					results:	result.body.data
 				res.ok(val)
 			.catch res.serverError
 		
