@@ -11,3 +11,11 @@ module.exports =
 					results:	result.data
 				res.ok(val)
 			.catch res.serverError
+		
+	create: (req, res) ->
+		data = actionUtil.parseValues(req)
+		
+		activiti.startprocessins(data.processdefID, req.user)
+			.then (result) ->
+				res.ok(result)
+			.catch res.serverError		

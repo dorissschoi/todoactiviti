@@ -24,9 +24,10 @@ module.exports =
 				else
 					return new Error "get activiti data failed"
 			
-	startprocessins: (processdefID) ->
+	startprocessins: (processdefID, createdBy) ->
 		data = 
 			processDefinitionId: processdefID
+			variables: [{name: 'createdBy', value: createdBy}]
 		@req "post", sails.config.activiti.url.startprocessins, data
 			.then (res) ->
 				if res.statusCode == 201
