@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="ApplyeLeave">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://activiti.org/test">
   <collaboration id="Collaboration">
     <participant id="sid-B5E7F080-AED4-4CAF-B3EA-A557D071B6CC" name="Apply eLeave" processRef="process"></participant>
   </collaboration>
@@ -28,18 +28,18 @@
       </lane>
     </laneSet>
     <startEvent id="sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12"></startEvent>
-    <scriptTask id="sid-5BB071F4-F361-4E57-9BE5-83CC485C9C5D" activiti:autoStoreVariables="false">
+    <scriptTask id="sid-5BB071F4-F361-4E57-9BE5-83CC485C9C5D" name="Before Apply" activiti:autoStoreVariables="false">
       <script><![CDATA[execution.setVariable("url", "https://dp2.ogcio.ccgo.hksarg/eleave/elaps/DPEntry/OGCIO");]]></script>
     </scriptTask>
-    <userTask id="sid-436CB129-C8F9-4155-8242-5D6A6631B76E"></userTask>
-    <scriptTask id="sid-5AE7BCE7-115A-4BD5-AE0A-A906C96692A2" activiti:autoStoreVariables="false">
+    <userTask id="sid-436CB129-C8F9-4155-8242-5D6A6631B76E" name="Apply" activiti:assignee="kermit"></userTask>
+    <scriptTask id="sid-5AE7BCE7-115A-4BD5-AE0A-A906C96692A2" name="Before Recommend" activiti:autoStoreVariables="false">
       <script><![CDATA[execution.setVariable("url", "https://dp2.ogcio.ccgo.hksarg/eleave/elaps/DPEntry/OGCIO");]]></script>
     </scriptTask>
-    <userTask id="sid-8323BC35-CB20-4FE3-971B-582727904903"></userTask>
-    <scriptTask id="sid-892A6A48-8AEC-4012-81BE-B22C1C6ABFBB" activiti:autoStoreVariables="false">
+    <userTask id="sid-8323BC35-CB20-4FE3-971B-582727904903" name="Recommend" activiti:assignee="kermit"></userTask>
+    <scriptTask id="sid-892A6A48-8AEC-4012-81BE-B22C1C6ABFBB" name="Before Approve" activiti:autoStoreVariables="false">
       <script><![CDATA[execution.setVariable("url", "https://dp2.ogcio.ccgo.hksarg/eleave/elaps/DPEntry/OGCIO");]]></script>
     </scriptTask>
-    <userTask id="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED"></userTask>
+    <userTask id="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" name="Approve" activiti:assignee="kermit"></userTask>
     <endEvent id="sid-8EF6BDE6-C9C3-4D36-9AED-D9CCDD23320F"></endEvent>
     <sequenceFlow id="sid-89667CF8-B701-499B-BDCF-9E7631D5BCF4" sourceRef="sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12" targetRef="sid-5BB071F4-F361-4E57-9BE5-83CC485C9C5D"></sequenceFlow>
     <sequenceFlow id="sid-6C195DDA-D268-4E25-9D08-B95685237536" sourceRef="sid-5BB071F4-F361-4E57-9BE5-83CC485C9C5D" targetRef="sid-436CB129-C8F9-4155-8242-5D6A6631B76E"></sequenceFlow>
