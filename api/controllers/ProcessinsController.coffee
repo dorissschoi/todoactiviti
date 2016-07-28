@@ -15,7 +15,10 @@ module.exports =
 	create: (req, res) ->
 		data = actionUtil.parseValues(req)
 		
-		activiti.startprocessins(data.processdefID, req.user)
-			.then (result) ->
-				res.ok(result)
+		activiti.startProcIns(data.processdefID, req.user)
+			.then (procIns) ->
+				activiti.getProcInsVar procIns.url
+					.then (procInsVari) ->
+						activiti.createTask procInsVari.body.value, req.user						
+							.catch res.serverError	 
 			.catch res.serverError		
