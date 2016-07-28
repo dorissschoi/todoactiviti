@@ -8,16 +8,18 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		$scope.env = env
 		$scope.navigator = navigator
 
-	.controller 'ListProcessdefCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources) ->
+	.controller 'ListProcessdefCtrl', ($scope, collection, resources, $location) ->
 		_.extend $scope,
 			
 			collection: collection
 			
 			# save model backend call post
-			startprocdef: (startitem) ->
-				item = new resources.Processdef
-					processdefID: startitem.id
-				item.$save()
+			startProcess: (item) ->
+				process = new resources.Processins
+					processdefID: item.id
+				process.$save()
+					.then () ->
+						$location.url "/todo/processdefList"
 					
 	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources) ->
 		_.extend $scope,

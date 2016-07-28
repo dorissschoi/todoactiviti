@@ -3,10 +3,9 @@
 <ion-content class="">	
 	<ion-list>	
 		<ion-item class="processdeflist" ng-repeat="model in collection.models"  on-tap="$event.stopPropagation(); read('{{model.id}}');">				
-			  
-			  	{{model.id}},{{model.name}}			  
-			  
-			<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); startprocdef(model);">Start</ion-option-button>
+			<div class="col col-25 listview">{{model.id}}</div>
+			<div class="col col-75 listview">{{model.name}}</div>
+			<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); startProcess(model);">Start</ion-option-button>
 			<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);"></ion-option-button>
 		</ion-item>
 	</ion-list>

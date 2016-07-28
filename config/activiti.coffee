@@ -4,7 +4,7 @@ module.exports.activiti =
 	
 	url:
 		startprocessins: "#{serverurl}/runtime/process-instances"
-		processdeflist: "#{serverurl}/repository/process-definitions?category=http://www.activiti.org/processdef"
+		processdeflist: "#{serverurl}/repository/process-definitions?category=ApplyeLeave"
 		runninglist: "#{serverurl}/runtime/tasks"
 			
 	username:	'kermit'
