@@ -3,18 +3,13 @@ Promise = require 'promise'
 module.exports =
 
 	req: (method, url, data) ->
-		auth = "Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
 		opts = 
 			headers:
-				Authorization:	auth
+				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
 				'Content-Type': 'application/json'
 			json: true
-		
-		new Promise (resolve, reject) ->
-			sails.services.rest[method] {}, url, opts, data
-				.then (res) ->
-					resolve res
-				.catch reject
+
+		sails.services.rest[method] {}, url, opts, data
 				
 	getlist: (url) ->
 		@req "get", url
