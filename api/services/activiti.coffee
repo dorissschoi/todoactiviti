@@ -10,16 +10,8 @@ module.exports =
 			json: true
 
 		sails.services.rest[method] {}, url, opts, data
-				
-	getlist: (url) ->
-		@req "get", url
-			.then (res) ->
-				if !_.isUndefined res.body.data
-					return res.body
-				else
-					return new Error "get activiti data failed"
-			
-	startprocessins: (processdefID, createdBy) ->
+		
+	startProcIns: (processdefID, createdBy) ->
 		data = 
 			processDefinitionId: processdefID
 			variables: [{name: 'createdBy', value: createdBy}]
@@ -29,4 +21,11 @@ module.exports =
 					return res.body
 				else
 					return new Error "Start activiti process instance failed"
-								
+			.catch (err) ->
+				return err
+				
+	getProcInsVar: (varUrl) ->
+		@req "get", "#{varUrl}/variables/url"
+		
+	createTask: (appUrl, user) ->	
+		sails.models.todo.create task:'Apply eLeave', createdBy: user, ownedBy: user, url: appUrl	
