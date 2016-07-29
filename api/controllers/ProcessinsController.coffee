@@ -16,7 +16,7 @@ module.exports =
 		
 		activiti.startProcIns(data.processdefID, req.user)
 			.then (procIns) ->
-				activiti.getProcInsVar procIns.url, 'url'
+				activiti.getProcInsVar procIns.id, 'url'
 					.then (procInsVari) ->												
 						activiti.getTask procIns.id
 							.then (task) ->							

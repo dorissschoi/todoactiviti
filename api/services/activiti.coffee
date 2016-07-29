@@ -15,7 +15,7 @@ module.exports =
 		data = 
 			processDefinitionId: processdefID
 			variables: [{name: 'createdBy', value: createdBy}]
-		@req "post", sails.config.activiti.url.startprocessins, data
+		@req "post", sails.config.activiti.url.processinslist, data
 			.then (res) ->
 				if res.statusCode == 201
 					return res.body
@@ -24,8 +24,8 @@ module.exports =
 			.catch (err) ->
 				return err
 				
-	getProcInsVar: (varUrl, varName) ->
-		@req "get", "#{varUrl}/variables/#{varName}"
+	getProcInsVar: (procInsId, varName) ->
+		@req "get", "#{sails.config.activiti.url.processinslist}/#{procInsId}/variables/#{varName}"
 		
 	getTask: (procInsId) ->
 		@req "get", "#{sails.config.activiti.url.runninglist}?processInstanceId=#{procInsId}"
