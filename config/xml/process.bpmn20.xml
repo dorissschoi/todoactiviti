@@ -28,15 +28,15 @@
       </lane>
     </laneSet>
     <startEvent id="sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12"></startEvent>
-    <scriptTask id="sid-5BB071F4-F361-4E57-9BE5-83CC485C9C5D" name="Before Apply" activiti:autoStoreVariables="false">
+    <scriptTask id="sid-5BB071F4-F361-4E57-9BE5-83CC485C9C5D" name="Before Apply" scriptFormat="JavaScript" activiti:autoStoreVariables="false">
       <script><![CDATA[execution.setVariable("url", "https://dp2.ogcio.ccgo.hksarg/eleave/elaps/DPEntry/OGCIO");]]></script>
     </scriptTask>
     <userTask id="sid-436CB129-C8F9-4155-8242-5D6A6631B76E" name="Apply" activiti:assignee="kermit"></userTask>
-    <scriptTask id="sid-5AE7BCE7-115A-4BD5-AE0A-A906C96692A2" name="Before Recommend" activiti:autoStoreVariables="false">
+    <scriptTask id="sid-5AE7BCE7-115A-4BD5-AE0A-A906C96692A2" name="Before Recommend" scriptFormat="JavaScript" activiti:autoStoreVariables="false">
       <script><![CDATA[execution.setVariable("url", "https://dp2.ogcio.ccgo.hksarg/eleave/elaps/DPEntry/OGCIO");]]></script>
     </scriptTask>
     <userTask id="sid-8323BC35-CB20-4FE3-971B-582727904903" name="Recommend" activiti:assignee="kermit"></userTask>
-    <scriptTask id="sid-892A6A48-8AEC-4012-81BE-B22C1C6ABFBB" name="Before Approve" activiti:autoStoreVariables="false">
+    <scriptTask id="sid-892A6A48-8AEC-4012-81BE-B22C1C6ABFBB" name="Before Approve" scriptFormat="JavaScript" activiti:autoStoreVariables="false">
       <script><![CDATA[execution.setVariable("url", "https://dp2.ogcio.ccgo.hksarg/eleave/elaps/DPEntry/OGCIO");]]></script>
     </scriptTask>
     <userTask id="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" name="Approve" activiti:assignee="kermit"></userTask>
