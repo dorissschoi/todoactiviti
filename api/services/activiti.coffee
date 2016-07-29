@@ -26,3 +26,14 @@ module.exports =
 				
 	getProcInsVar: (varUrl, varName) ->
 		@req "get", "#{varUrl}/variables/#{varName}"
+		
+	getTask: (procInsId) ->
+		@req "get", "#{sails.config.activiti.url.runninglist}?processInstanceId=#{procInsId}"
+			.then (tasks) ->
+				@task = tasks.body.data
+				if _.isArray @task
+					@task = @task[0]
+				return @task
+			.catch (err) ->
+				return err
+					
