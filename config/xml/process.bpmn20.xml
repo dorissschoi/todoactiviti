@@ -31,15 +31,15 @@
     <scriptTask id="sid-5BB071F4-F361-4E57-9BE5-83CC485C9C5D" name="Before Apply" scriptFormat="JavaScript" activiti:autoStoreVariables="false">
       <script><![CDATA[execution.setVariable("url", "https://dp2.ogcio.ccgo.hksarg/eleave/elaps/DPEntry/OGCIO");]]></script>
     </scriptTask>
-    <userTask id="sid-436CB129-C8F9-4155-8242-5D6A6631B76E" name="Apply" activiti:assignee="kermit"></userTask>
+    <userTask id="sid-436CB129-C8F9-4155-8242-5D6A6631B76E" name="Apply eLeave" activiti:assignee="kermit"></userTask>
     <scriptTask id="sid-5AE7BCE7-115A-4BD5-AE0A-A906C96692A2" name="Before Recommend" scriptFormat="JavaScript" activiti:autoStoreVariables="false">
       <script><![CDATA[execution.setVariable("url", "https://dp2.ogcio.ccgo.hksarg/eleave/elaps/DPEntry/OGCIO");]]></script>
     </scriptTask>
-    <userTask id="sid-8323BC35-CB20-4FE3-971B-582727904903" name="Recommend" activiti:assignee="kermit"></userTask>
+    <userTask id="sid-8323BC35-CB20-4FE3-971B-582727904903" name="Recommend eLeave" activiti:assignee="kermit"></userTask>
     <scriptTask id="sid-892A6A48-8AEC-4012-81BE-B22C1C6ABFBB" name="Before Approve" scriptFormat="JavaScript" activiti:autoStoreVariables="false">
       <script><![CDATA[execution.setVariable("url", "https://dp2.ogcio.ccgo.hksarg/eleave/elaps/DPEntry/OGCIO");]]></script>
     </scriptTask>
-    <userTask id="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" name="Approve" activiti:assignee="kermit"></userTask>
+    <userTask id="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" name="Approve eLeave" activiti:assignee="kermit"></userTask>
     <endEvent id="sid-8EF6BDE6-C9C3-4D36-9AED-D9CCDD23320F"></endEvent>
     <sequenceFlow id="sid-89667CF8-B701-499B-BDCF-9E7631D5BCF4" sourceRef="sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12" targetRef="sid-5BB071F4-F361-4E57-9BE5-83CC485C9C5D"></sequenceFlow>
     <sequenceFlow id="sid-6C195DDA-D268-4E25-9D08-B95685237536" sourceRef="sid-5BB071F4-F361-4E57-9BE5-83CC485C9C5D" targetRef="sid-436CB129-C8F9-4155-8242-5D6A6631B76E"></sequenceFlow>
