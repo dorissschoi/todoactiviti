@@ -26,6 +26,3 @@ module.exports =
 				
 	getProcInsVar: (varUrl, varName) ->
 		@req "get", "#{varUrl}/variables/#{varName}"
-		
-	createTask: (appUrl, user) ->	
-		sails.models.todo.create task:'Apply eLeave', createdBy: user, ownedBy: user, url: appUrl	
