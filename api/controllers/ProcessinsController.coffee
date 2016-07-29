@@ -28,5 +28,6 @@ module.exports =
 								sails.models.todo.create @task
 									.then res.ok				
 									.catch res.serverError
+							.catch res.serverError		
 					.catch res.serverError			 
 			.catch res.serverError		
