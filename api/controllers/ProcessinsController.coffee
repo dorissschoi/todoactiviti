@@ -16,8 +16,15 @@ module.exports =
 		
 		activiti.startProcIns(data.processdefID, req.user)
 			.then (procIns) ->
-				activiti.getProcInsVar procIns.url
+				activiti.getProcInsVar procIns.url, 'url'
 					.then (procInsVari) ->
-						activiti.createTask procInsVari.body.value, req.user						
-							.catch res.serverError	 
+						task = 
+							task:'Apply eLeave'
+							createdBy: req.user
+							ownedBy: req.user
+							url: procInsVari.body.value
+						sails.models.todo.create task
+							.then res.ok				
+							.catch res.serverError
+					.catch res.serverError			 
 			.catch res.serverError		
