@@ -23,17 +23,3 @@ module.exports =
 					return new Error "Start activiti process instance failed"
 			.catch (err) ->
 				return err
-				
-	getProcInsVar: (procInsId, varName) ->
-		@req "get", "#{sails.config.activiti.url.processinslist}/#{procInsId}/variables/#{varName}"
-		
-	getTask: (procInsId) ->
-		@req "get", "#{sails.config.activiti.url.runninglist}?processInstanceId=#{procInsId}"
-			.then (tasks) ->
-				@task = tasks.body.data
-				if _.isArray @task
-					@task = @task[0]
-				return @task
-			.catch (err) ->
-				return err
-					
