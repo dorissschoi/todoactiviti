@@ -5,9 +5,9 @@ services:
     container_name: todo_mongo
     hostname: todo_mongo
     ports:
-      - 27017
+      - 27107:27017
     volumes:
-      - ${COMPOSEROOT}/todo/data:/data/db
+      - /home/jeffery/git/todoactiviti/mongoData:/data/db
     command: mongod --directoryperdb 
     
   todo:
@@ -19,43 +19,44 @@ services:
     container_name: todo
     hostname: todo
     ports:
-      - 1337
+      - 1337:1337
     volumes:
-      - ${COMPOSEROOT}/todo/conf/server.coffee:/usr/src/app/config/env/development.coffee
-      - ${COMPOSEROOT}/todo/conf/client.coffee:/usr/src/app/www/js/config/development.coffee
-      - ${COMPOSEROOT}/todo/conf/entrypoint.sh:/usr/src/app/entrypoint.sh
-      - /etc/ssl/certs:/etc/ssl/certs
-      - /usr/local/share/ca-certificates:/usr/local/share/ca-certificates
-      
+      - /home/jeffery/git/todoactiviti/config/env/development.coffee:/usr/src/app/config/env/development.coffee
+      - /home/jeffery/git/todoactiviti/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
+      - /home/jeffery/git/todoactiviti/entrypoint.sh:/usr/src/app/entrypoint.sh
         
   activiti_mysql:
     hostname: activiti_mysql
     container_name: activiti_mysql
-    image: sameersbn/mysql:latest
+    image: mariadb  
+    ports:
+      - 3306:3306
     volumes:
-      - ${COMPOSEROOT}/todo/mysqldata:/var/lib/mysql
-      - /etc/localtime:/etc/localtime
+      - /home/jeffery/git/activiti/newmysqldata:/var/lib/mysql
+      - /etc/localtime:/etc/localtime       
     environment:
-      - DB_NAME=
-      - DB_USER=
-      - DB_PASS=     
-      
+      - MYSQL_ROOT_PASSWORD=pass1234
+      - MYSQL_DATABASE=activiti_production
+      - MYSQL_USER=activiti
+      - MYSQL_PASSWORD=pass1234
+  
   activiti_server:
     hostname: activiti_server
     container_name: activiti_server
     image: dorissschoi/activiti:latest
     volumes:
       - /etc/localtime:/etc/localtime
+      - /etc/ssl/certs:/etc/ssl/certs       
+      - /usr/local/share/ca-certificates:/usr/local/share/ca-certificates
     links:
       - activiti_mysql:mysql
     ports:
-      - 8080  
-    # for version 1 link env var
+      - 8080:8080  
     environment:
-      - DB_TYPE=mysql
       - DB_HOST=activiti_mysql
       - DB_PORT=3306
-      # support for linked sameersbn/mysql image
-      - DB_NAME=
-      - DB_USER=
-      - DB_PASS=       
+      - DB_NAME=activiti_production
+      - DB_USER=activiti
+      - DB_PASS=pass1234
+      - http_proxy=http://proxy1.scig.gov.hk:8080
+      - https_proxy=http://proxy1.scig.gov.hk:8080
