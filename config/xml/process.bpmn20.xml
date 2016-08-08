@@ -31,10 +31,10 @@ def slurper = new groovy.json.JsonSlurper()
 def tokenresult = slurper.parseText(token.text)
 def url = 'https://dp2.ogcio.ccgo.hksarg/eleave/elaps/DPEntry/OGCIO'
 println tokenresult
+println task.id
 println task.name
 println task.getVariable('createdBy')
-
-def todo = ['bash', '-c', "curl -X POST -k -H \"Authorization:Bearer ${tokenresult.access_token}\" -d \"task=${task.name}&ownedBy=${task.getVariable('createdBy').username}&url=${url}\" https://mob.myvnc.com/todo/api/todo/"].execute()
+def todo = ['bash', '-c', "curl -X POST -k -H \"Authorization:Bearer ${tokenresult.access_token}\" -d \"task=${task.name}&ownedBy=${task.getVariable('createdBy').username}&url=${url}&taskId=${task.id}&type=activiti\" https://mob.myvnc.com/todo/api/todo/"].execute()
 def todoresult = slurper.parseText(todo.text)
 println todoresult
 todo.waitFor()]]></activiti:string>
@@ -48,10 +48,10 @@ todo.waitFor()]]></activiti:string>
     <userTask id="sid-8323BC35-CB20-4FE3-971B-582727904903" name="Recommend eLeave" activiti:assignee="kermit"></userTask>
     <userTask id="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" name="Approve eLeave" activiti:assignee="kermit"></userTask>
     <endEvent id="sid-8EF6BDE6-C9C3-4D36-9AED-D9CCDD23320F"></endEvent>
-    <sequenceFlow id="sid-7DC40A3D-B145-4FD2-AC5B-E4DB65594A57" sourceRef="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" targetRef="sid-8EF6BDE6-C9C3-4D36-9AED-D9CCDD23320F"></sequenceFlow>
     <sequenceFlow id="sid-DF16D852-F258-4112-84A1-5A78EF608484" sourceRef="sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12" targetRef="sid-436CB129-C8F9-4155-8242-5D6A6631B76E"></sequenceFlow>
     <sequenceFlow id="sid-A7402BDC-F004-4441-B6E7-1E76BBE13674" sourceRef="sid-436CB129-C8F9-4155-8242-5D6A6631B76E" targetRef="sid-8323BC35-CB20-4FE3-971B-582727904903"></sequenceFlow>
     <sequenceFlow id="sid-2DD372CE-5DC0-470A-8E55-CEF97813866D" sourceRef="sid-8323BC35-CB20-4FE3-971B-582727904903" targetRef="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED"></sequenceFlow>
+    <sequenceFlow id="sid-7DC40A3D-B145-4FD2-AC5B-E4DB65594A57" sourceRef="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" targetRef="sid-8EF6BDE6-C9C3-4D36-9AED-D9CCDD23320F"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
     <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
