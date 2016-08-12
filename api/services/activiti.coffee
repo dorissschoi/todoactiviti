@@ -1,4 +1,14 @@
 Promise = require 'promise'
+		
+taskCompleted = (taskId, currHandler) ->
+	data =
+		action: 'complete'
+		variables: [{name: 'currHandler', value: currHandler}]
+	module.exports.req "post", "#{sails.config.activiti.url.runninglist}/#{taskId}", data
+		.then (res) ->
+			if res.statusCode == 200 then res.body else new Error res.statusCode
+		.catch (err) ->
+			sails.log.error err
 
 module.exports =
 
@@ -14,12 +24,14 @@ module.exports =
 	startProcIns: (processdefID, createdBy) ->
 		data = 
 			processDefinitionId: processdefID
-			variables: [{name: 'createdBy', value: createdBy}]
+			variables: [{name: 'createdBy', value: createdBy.username}]
 		@req "post", sails.config.activiti.url.processinslist, data
 			.then (res) ->
-				if res.statusCode == 201
-					return res.body
-				else
-					return new Error "Start activiti process instance failed"
+				if res.statusCode == 201 then res.body else new Error res.statusCode
 			.catch (err) ->
-				return err
+				sails.log.error err
+	
+	completeTask: (taskId, currHandler) ->
+		taskCompleted taskId, currHandler
+			.catch (err) ->
+				sails.log.error err

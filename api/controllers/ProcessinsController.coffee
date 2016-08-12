@@ -3,7 +3,7 @@ actionUtil = require 'sails/lib/hooks/blueprints/actionUtil'
 
 module.exports =
 	find: (req, res) ->
-		activiti.req 'get', sails.config.activiti.url.runninglist
+		activiti.req "get", sails.config.activiti.url.runninglist
 			.then (result) ->
 				res.ok
 					count:		result.body.total
@@ -12,8 +12,7 @@ module.exports =
 		
 	create: (req, res) ->
 		data = actionUtil.parseValues(req)
-		
-		activiti.startProcIns(data.processdefID, req.user)
-			.then (result) ->
-				res.ok result
-			.catch res.serverError		
+
+		activiti.startProcIns data.processdefID, req.user
+			.then res.ok				
+			.catch res.serverError
