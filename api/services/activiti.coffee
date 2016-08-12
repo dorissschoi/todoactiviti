@@ -3,7 +3,7 @@ Promise = require 'promise'
 taskCompleted = (taskId, currHandler) ->
 	data =
 		action: 'complete'
-		variables: [{name: 'currHandler', value: currHandler}]
+		variables: [{name: 'completedBy', value: currHandler}]
 	module.exports.req "post", "#{sails.config.activiti.url.runninglist}/#{taskId}", data
 		.then (res) ->
 			if res.statusCode == 200 then res.body else new Error res.statusCode
