@@ -14,7 +14,7 @@ module.exports =
 		data = actionUtil.parseValues(req)
 		
 		if req.body.progress == 100 and req.body.type != 'manual'
-			activiti.completeTask req.body.taskId, req.body.procInsId, req.user
+			activiti.completeTask req.body.taskId, req.user
 		
 		new Promise (fulfill, reject) ->
 			Model.update({ id: req.body.id },data)
