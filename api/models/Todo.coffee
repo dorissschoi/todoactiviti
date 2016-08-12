@@ -54,6 +54,16 @@ module.exports =
 			type: 'boolean'
 			defaultsTo: true
 
+		type:
+			type: 'string'
+			defaultsTo: 'manual'
+			
+		procInsId:
+			type: 'string'	
+			
+		taskId:
+			type: 'string'	
+
 	afterCreate: (values, cb) ->
 		MsgService.sendMsg(values)
 

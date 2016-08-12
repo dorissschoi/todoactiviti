@@ -38,5 +38,6 @@
 	"createdBy":		"Created By",
 	"processdef":		"Process definition",
 	"runningprocins":	"Running process instance",
+	"myrunningprocins":	"My Running process instance",
 	"url":				"Url"		
 }

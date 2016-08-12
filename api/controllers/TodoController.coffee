@@ -9,4 +9,15 @@ module.exports =
 	find: (req, res) ->
 		sails.services.crud.find(req).then res.ok, res.serverError
 		
-	
+	update: (req, res) ->
+		Model = actionUtil.parseModel req
+		data = actionUtil.parseValues(req)
+		
+		if req.body.progress == 100 and req.body.type != 'manual'
+			activiti.completeTask req.body.taskId, req.body.procInsId, req.user
+		
+		new Promise (fulfill, reject) ->
+			Model.update({ id: req.body.id },data)
+				.then (values) ->
+					fulfill res.ok()
+				.catch reject	

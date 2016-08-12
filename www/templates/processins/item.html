@@ -4,7 +4,7 @@
 	<ion-list>	
 		<ion-item class="processdeflist" ng-repeat="model in collection.models">				
 			  
-			  	processDefinitionId:{{model.processDefinitionId}}, executionId: {{model.executionId}}, Id: {{model.id}}, createTime: {{model.createTime | date: 'MMM d, y H:mm:ss' : '+0800'}}			  
+			  	{{model.name}}, {{model.createTime | date: 'MMM d, y H:mm:ss' : '+0800'}}			  
 			  
 			<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); startprocdef(model);">Start</ion-option-button>
 			<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);"></ion-option-button>

@@ -35,3 +35,28 @@ module.exports =
 		taskCompleted taskId, currHandler
 			.catch (err) ->
 				sails.log.error err
+				
+	getTaskName: (record) ->
+		@req "get", "#{sails.config.activiti.url.runninglist}?processInstanceId=#{record.id}"
+			.then (tasks) ->
+				task = tasks.body.data
+				if _.isArray task
+					task = task[0]
+				_.extend record,
+					name: task.name	
+					createTime: task.createTime
+				return record
+			.catch (err) ->
+				sails.log.error err
+							
+	getMyProcIns: (createdBy) ->
+		data = 
+			variables: [{name: 'createdBy', value: createdBy, operation: 'equals', type: 'string'}]
+		@req "post", sails.config.activiti.url.queryinslist, data
+			.then (res) ->
+				if res.statusCode == 200
+					return res
+				else
+					return new Error "Start activiti process instance failed"
+			.catch (err) ->
+				return err				

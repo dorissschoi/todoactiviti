@@ -2,7 +2,8 @@
     <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
     </button>
     <h1 class='title'>
-    	<span >{{'runningprocins' | translate}}</span>
+    	<span ng-if="createdBy == 'me'">{{'myrunningprocins' | translate}}</span>
+    	<span ng-if="createdBy != 'me'">{{'runningprocins' | translate}}</span>    	
     </h1>
 </ion-header-bar>
 

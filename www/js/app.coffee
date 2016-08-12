@@ -93,17 +93,20 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					ret.$fetch()
 
 		$stateProvider.state 'app.listProcessins',
-			url: "/todo/processinsList"
+			url: "/todo/processinsList?createdBy"
 			cache: false
 			views:
 				'menuContent':
 					templateUrl: "templates/processins/list.html"
 					controller: 'ListProcessinsCtrl'
 			resolve:
+				createdBy: ($stateParams) ->
+					return $stateParams.createdBy
 				resources: 'resources'
-				collection: (resources) ->
+				collection: (resources, createdBy) ->
 					ret = new resources.ProcessinsList()
-					ret.$fetch()		
+					ret.$fetch({params: {createdBy: createdBy}})		
+		
 					
 		$urlRouterProvider.otherwise('/todo/weekList?ownedBy=me&sort=project desc')				
 		#$urlRouterProvider.otherwise('/todo/processdefList')
