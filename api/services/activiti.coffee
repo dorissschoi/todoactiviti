@@ -24,7 +24,7 @@ module.exports =
 	startProcIns: (processdefID, createdBy) ->
 		data = 
 			processDefinitionId: processdefID
-			variables: [{name: 'createdBy', value: createdBy.username}]
+			variables: [{name: 'createdBy', value: createdBy.username}, {name: 'nextHandler', value: createdBy.username}]
 		@req "post", sails.config.activiti.url.processinslist, data
 			.then (res) ->
 				if res.statusCode == 201 then res.body else new Error res.statusCode
