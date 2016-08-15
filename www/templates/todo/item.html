@@ -46,9 +46,9 @@
 			  	<p class="tododate">{{model.dateEnd | date: 'dd-MM-yyyy'}}</p>
 			  </div>
 			</div>
-			<ion-option-button ng-if="model.type != 'manual' && model.progress < 100" class="button button-balanced icon-left ion-checkmark" on-tap="$event.stopPropagation(); completeTask(model);">Complete</ion-option-button>
-			<ion-option-button ng-if="model.type == 'manual'" class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); edit(model);">Edit</ion-option-button>
-			<ion-option-button ng-if="model.type == 'manual'" class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">Delete</ion-option-button>
+			<ion-option-button ng-if="model.type == 'activiti' && model.progress < 100" class="button button-balanced icon-left ion-checkmark" on-tap="$event.stopPropagation(); completeTask(model);">Complete</ion-option-button>
+			<ion-option-button ng-if="model.type != 'activiti'" class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); edit(model);">Edit</ion-option-button>
+			<ion-option-button ng-if="model.type != 'activiti'" class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">Delete</ion-option-button>
 		</ion-item>
 	</ion-list>
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
