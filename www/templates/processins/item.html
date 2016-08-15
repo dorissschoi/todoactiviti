@@ -5,9 +5,7 @@
 		<ion-item class="processdeflist" ng-repeat="model in collection.models">				
 			  
 			  	{{model.name}}, {{model.createTime | date: 'MMM d, y H:mm:ss' : '+0800'}}			  
-			  
-			<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); startprocdef(model);">Start</ion-option-button>
-			<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);"></ion-option-button>
+			
 		</ion-item>
 	</ion-list>
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">

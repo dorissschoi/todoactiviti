@@ -36,6 +36,12 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			
 			collection: collection
 			
+			completeTask: (item) ->
+				item.progress = 100;
+				item.dateEnd = _.now();
+				item.$save()
+					.catch alert
+			
 			edit: (item) ->
 				$location.url "/todo/edit/#{item.id}"		
 				
