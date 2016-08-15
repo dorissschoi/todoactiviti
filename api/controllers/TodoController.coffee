@@ -16,8 +16,7 @@ module.exports =
 		if req.body.progress == 100 and req.body.type != 'manual'
 			activiti.completeTask req.body.taskId, req.user
 		
-		new Promise (fulfill, reject) ->
-			Model.update({ id: req.body.id },data)
-				.then (values) ->
-					fulfill res.ok()
-				.catch reject	
+		Model.update({ id: req.body.id },data)
+			.then (values) ->
+				res.ok()
+			.catch res.serverError	

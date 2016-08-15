@@ -4,7 +4,7 @@
 	<ion-list>	
 		<ion-item class="processdeflist" ng-repeat="model in collection.models">				
 			  
-			  	{{model.name}}, {{model.createTime | date: 'MMM d, y H:mm:ss' : '+0800'}}			  
+			  	{{model.name}}, {{model.nextHandler}}, {{model.createTime | date: 'MMM d, y H:mm:ss' : '+0800'}}			  			  			  
 			
 		</ion-item>
 	</ion-list>

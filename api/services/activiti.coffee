@@ -36,22 +36,28 @@ module.exports =
 			.catch (err) ->
 				sails.log.error err
 				
-	getTaskName: (record) ->
+	getTaskDetail: (record) ->
 		@req "get", "#{sails.config.activiti.url.runninglist}?processInstanceId=#{record.id}"
 			.then (tasks) ->
 				task = tasks.body.data
 				if _.isArray task
 					task = task[0]
+				
+				nextUser = ""	
+				_.each record.variables, (record) ->
+					if record.name == "nextHandler"
+						nextUser= record.value
 				_.extend record,
 					name: task.name	
 					createTime: task.createTime
+					nextHandler: nextUser			
 				return record
 			.catch (err) ->
 				sails.log.error err
 							
-	getMyProcIns: (createdBy) ->
+	getMyProcIns: (varName, username) ->
 		data = 
-			variables: [{name: 'createdBy', value: createdBy, operation: 'equals', type: 'string'}]
+			variables: [{name: varName, value: username, operation: 'equals', type: 'string'}]
 		@req "post", sails.config.activiti.url.queryinslist, data
 			.then (res) ->
 				if res.statusCode == 200
@@ -59,4 +65,14 @@ module.exports =
 				else
 					return new Error "Start activiti process instance failed"
 			.catch (err) ->
-				return err				
+				return err
+	
+	getInsVar: (record, varName) ->
+		@req "get", "#{sails.config.activiti.url.processinslist}/#{record.id}/variables/#{varName}"
+			.then (res) ->
+				if res.statusCode == 200
+					_.extend record,
+						nextHandler: res.body.value			
+					return record
+			.catch (err) ->
+				sails.log.error err							
