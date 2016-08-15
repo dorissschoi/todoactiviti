@@ -37,10 +37,12 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			collection: collection
 			
 			completeTask: (item) ->
-				item.progress = 100;
-				item.dateEnd = _.now();
+				item.progress = 100
+				item.dateEnd = new Date
 				item.$save()
-					.catch alert
+					.catch (err) ->
+						alert err
+						collection.$refetch({params: {ownedBy: ownedBy, sort: sortBy }})								
 			
 			edit: (item) ->
 				$location.url "/todo/edit/#{item.id}"		
