@@ -5,7 +5,7 @@
     	<span ng-if="ownedBy == 'me'">{{'mytask' | translate}}</span>
     	<span ng-if="ownedBy != 'me'">{{'alltask' | translate}}</span>
     </h1>
-      
+    <button class="button ion-plus-round button-clear" ui-sref="app.createTodo"></button>  
 </ion-header-bar>
 
 <ng-include src="'templates/todo/item.html'"></ng-include>

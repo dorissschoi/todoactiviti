@@ -36,6 +36,13 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			
 			collection: collection
 			
+			openurl: (item) ->
+				if item.type == 'manual'
+					$location.url "/todo/edit/#{item.id}"
+				else
+					if item.url
+						window.open(item.url, '_blank')
+							
 			completeTask: (item) ->
 				item.progress = 100
 				item.dateEnd = new Date
