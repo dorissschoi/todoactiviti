@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://activiti.org/test">
   <collaboration id="Collaboration">
-    <participant id="sid-B5E7F080-AED4-4CAF-B3EA-A557D071B6CC" name="Apply eLeave" processRef="process"></participant>
+    <participant id="sid-B5E7F080-AED4-4CAF-B3EA-A557D071B6CC" name="eLeave" processRef="process"></participant>
   </collaboration>
-  <process id="process" name="Apply eLeave" isExecutable="true">
+  <process id="process" name="eLeave" isExecutable="true">
     <laneSet id="laneSet_process">
       <lane id="sid-626DDE99-5ABC-43DA-8099-E3635DC3F771" name="Apply">
         <flowNodeRef>sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12</flowNodeRef>
         <flowNodeRef>sid-436CB129-C8F9-4155-8242-5D6A6631B76E</flowNodeRef>
-        <flowNodeRef>sid-A7402BDC-F004-4441-B6E7-1E76BBE13674</flowNodeRef>
         <flowNodeRef>sid-DF16D852-F258-4112-84A1-5A78EF608484</flowNodeRef>
+        <flowNodeRef>sid-A7402BDC-F004-4441-B6E7-1E76BBE13674</flowNodeRef>
       </lane>
       <lane id="sid-51123AEA-092A-4C19-950C-B250218F2DFE" name="recommend">
         <flowNodeRef>sid-8323BC35-CB20-4FE3-971B-582727904903</flowNodeRef>
@@ -22,7 +22,7 @@
       </lane>
     </laneSet>
     <startEvent id="sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12"></startEvent>
-    <userTask id="sid-436CB129-C8F9-4155-8242-5D6A6631B76E" name="Apply eLeave" activiti:assignee="kermit">
+    <userTask id="sid-436CB129-C8F9-4155-8242-5D6A6631B76E" name="eLeave - Apply" activiti:assignee="kermit">
       <extensionElements>
         <activiti:taskListener event="create" class="org.activiti.engine.impl.bpmn.listener.ScriptTaskListener">
           <activiti:field name="script">
@@ -33,10 +33,7 @@ def token = ['bash', '-c', "curl -X POST -k -u \"todomsgUATAuth:pass1234\" -d \"
 def slurper = new groovy.json.JsonSlurper();
 def tokenresult = slurper.parseText(token.text);
 println tokenresult;
-println task.id;
-println task.name;
-println task.getVariable('createdBy');
-def todo = ['bash', '-c', "curl -X POST -k -H \"Authorization:Bearer ${tokenresult.access_token}\" -d \"task=${task.name}&ownedBy=${task.getVariable('createdBy')}&url=${url}&taskId=${task.id}&type=activiti\" ${todoAPI}"].execute();
+def todo = ['bash', '-c', "curl -X POST -k -H \"Authorization:Bearer ${tokenresult.access_token}\" -d \"task=${task.name}&ownedBy=${task.getVariable('createdBy')}&url=${url}&taskId=${task.id}&procInsId=${task.getProcessInstanceId()}&procCreateDate=${task.getVariable('createdAt')}&dateStart=${task.getCreateTime()}&type=activiti\" ${todoAPI}"].execute();
 def todoresult = slurper.parseText(todo.text);
 println todoresult;
 todo.waitFor();]]></activiti:string>
@@ -63,7 +60,7 @@ task.setVariable('nextHandler',nextHandler.username);]]></activiti:string>
         </activiti:taskListener>
       </extensionElements>
     </userTask>
-    <userTask id="sid-8323BC35-CB20-4FE3-971B-582727904903" name="Recommend eLeave" activiti:assignee="kermit">
+    <userTask id="sid-8323BC35-CB20-4FE3-971B-582727904903" name="eLeave - Recommend" activiti:assignee="kermit">
       <extensionElements>
         <activiti:taskListener event="create" class="org.activiti.engine.impl.bpmn.listener.ScriptTaskListener">
           <activiti:field name="script">
@@ -74,10 +71,7 @@ def token = ['bash', '-c', "curl -X POST -k -u \"todomsgUATAuth:pass1234\" -d \"
 def slurper = new groovy.json.JsonSlurper();
 def tokenresult = slurper.parseText(token.text);
 println tokenresult;
-println task.id;
-println task.name;
-println task.getVariable('ro');
-def todo = ['bash', '-c', "curl -X POST -k -H \"Authorization:Bearer ${tokenresult.access_token}\" -d \"task=${task.name}&ownedBy=${task.getVariable('ro')}&url=${url}&taskId=${task.id}&type=activiti\" ${todoAPI}"].execute();
+def todo = ['bash', '-c', "curl -X POST -k -H \"Authorization:Bearer ${tokenresult.access_token}\" -d \"task=${task.name}&ownedBy=${task.getVariable('ro')}&url=${url}&taskId=${task.id}&procInsId=${task.getProcessInstanceId()}&procCreateDate=${task.getVariable('createdAt')}&dateStart=${task.getCreateTime()}&type=activiti\" ${todoAPI}"].execute();
 def todoresult = slurper.parseText(todo.text);
 println todoresult;
 todo.waitFor();]]></activiti:string>
@@ -104,7 +98,7 @@ task.setVariable('nextHandler',nextHandler.username);]]></activiti:string>
         </activiti:taskListener>
       </extensionElements>
     </userTask>
-    <userTask id="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" name="Approve eLeave" activiti:assignee="kermit">
+    <userTask id="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" name="eLeave - Approve" activiti:assignee="kermit">
       <extensionElements>
         <activiti:taskListener event="create" class="org.activiti.engine.impl.bpmn.listener.ScriptTaskListener">
           <activiti:field name="script">
@@ -115,10 +109,7 @@ def token = ['bash', '-c', "curl -X POST -k -u \"todomsgUATAuth:pass1234\" -d \"
 def slurper = new groovy.json.JsonSlurper();
 def tokenresult = slurper.parseText(token.text);
 println tokenresult;
-println task.id;
-println task.name;
-println task.getVariable('ao');
-def todo = ['bash', '-c', "curl -X POST -k -H \"Authorization:Bearer ${tokenresult.access_token}\" -d \"task=${task.name}&ownedBy=${task.getVariable('ao')}&url=${url}&taskId=${task.id}&type=activiti\" ${todoAPI}"].execute();
+def todo = ['bash', '-c', "curl -X POST -k -H \"Authorization:Bearer ${tokenresult.access_token}\" -d \"task=${task.name}&ownedBy=${task.getVariable('ao')}&url=${url}&taskId=${task.id}&procInsId=${task.getProcessInstanceId()}&procCreateDate=${task.getVariable('createdAt')}&dateStart=${task.getCreateTime()}&type=activiti\" ${todoAPI}"].execute();
 def todoresult = slurper.parseText(todo.text);
 println todoresult;
 todo.waitFor();]]></activiti:string>
@@ -138,10 +129,10 @@ todo.waitFor();]]></activiti:string>
       </extensionElements>
     </userTask>
     <endEvent id="sid-8EF6BDE6-C9C3-4D36-9AED-D9CCDD23320F"></endEvent>
+    <sequenceFlow id="sid-DF16D852-F258-4112-84A1-5A78EF608484" sourceRef="sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12" targetRef="sid-436CB129-C8F9-4155-8242-5D6A6631B76E"></sequenceFlow>
     <sequenceFlow id="sid-A7402BDC-F004-4441-B6E7-1E76BBE13674" sourceRef="sid-436CB129-C8F9-4155-8242-5D6A6631B76E" targetRef="sid-8323BC35-CB20-4FE3-971B-582727904903"></sequenceFlow>
     <sequenceFlow id="sid-2DD372CE-5DC0-470A-8E55-CEF97813866D" sourceRef="sid-8323BC35-CB20-4FE3-971B-582727904903" targetRef="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED"></sequenceFlow>
     <sequenceFlow id="sid-7DC40A3D-B145-4FD2-AC5B-E4DB65594A57" sourceRef="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" targetRef="sid-8EF6BDE6-C9C3-4D36-9AED-D9CCDD23320F"></sequenceFlow>
-    <sequenceFlow id="sid-DF16D852-F258-4112-84A1-5A78EF608484" sourceRef="sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12" targetRef="sid-436CB129-C8F9-4155-8242-5D6A6631B76E"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
     <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
@@ -152,45 +143,41 @@ todo.waitFor();]]></activiti:string>
         <omgdc:Bounds height="250.0" width="570.0" x="78.0" y="77.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12" id="BPMNShape_sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12">
-        <omgdc:Bounds height="30.0" width="30.0" x="205.0" y="170.0"></omgdc:Bounds>
+        <omgdc:Bounds height="30.0" width="30.0" x="205.0" y="187.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="sid-436CB129-C8F9-4155-8242-5D6A6631B76E" id="BPMNShape_sid-436CB129-C8F9-4155-8242-5D6A6631B76E">
-        <omgdc:Bounds height="80.0" width="100.0" x="420.0" y="135.0"></omgdc:Bounds>
+        <omgdc:Bounds height="80.0" width="100.0" x="360.0" y="162.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="sid-51123AEA-092A-4C19-950C-B250218F2DFE" id="BPMNShape_sid-51123AEA-092A-4C19-950C-B250218F2DFE">
         <omgdc:Bounds height="250.0" width="570.0" x="78.0" y="327.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="sid-8323BC35-CB20-4FE3-971B-582727904903" id="BPMNShape_sid-8323BC35-CB20-4FE3-971B-582727904903">
-        <omgdc:Bounds height="80.0" width="100.0" x="425.0" y="401.0"></omgdc:Bounds>
+        <omgdc:Bounds height="80.0" width="100.0" x="360.0" y="412.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="sid-0CFABA69-A202-443C-95D2-714B64A5871E" id="BPMNShape_sid-0CFABA69-A202-443C-95D2-714B64A5871E">
         <omgdc:Bounds height="250.0" width="570.0" x="78.0" y="577.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED" id="BPMNShape_sid-0C5CA3F3-B619-4B7B-919A-379E9F1403ED">
-        <omgdc:Bounds height="80.0" width="100.0" x="425.0" y="638.0"></omgdc:Bounds>
+        <omgdc:Bounds height="80.0" width="100.0" x="360.0" y="662.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="sid-8EF6BDE6-C9C3-4D36-9AED-D9CCDD23320F" id="BPMNShape_sid-8EF6BDE6-C9C3-4D36-9AED-D9CCDD23320F">
-        <omgdc:Bounds height="28.0" width="28.0" x="570.0" y="664.0"></omgdc:Bounds>
+        <omgdc:Bounds height="28.0" width="28.0" x="570.0" y="688.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="sid-DF16D852-F258-4112-84A1-5A78EF608484" id="BPMNEdge_sid-DF16D852-F258-4112-84A1-5A78EF608484">
-        <omgdi:waypoint x="235.0" y="185.0"></omgdi:waypoint>
-        <omgdi:waypoint x="327.5" y="185.0"></omgdi:waypoint>
-        <omgdi:waypoint x="327.5" y="175.0"></omgdi:waypoint>
-        <omgdi:waypoint x="420.0" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="235.0" y="202.0"></omgdi:waypoint>
+        <omgdi:waypoint x="360.0" y="202.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-A7402BDC-F004-4441-B6E7-1E76BBE13674" id="BPMNEdge_sid-A7402BDC-F004-4441-B6E7-1E76BBE13674">
-        <omgdi:waypoint x="470.0" y="215.0"></omgdi:waypoint>
-        <omgdi:waypoint x="470.0" y="308.0"></omgdi:waypoint>
-        <omgdi:waypoint x="475.0" y="308.0"></omgdi:waypoint>
-        <omgdi:waypoint x="475.0" y="401.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="242.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="412.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-2DD372CE-5DC0-470A-8E55-CEF97813866D" id="BPMNEdge_sid-2DD372CE-5DC0-470A-8E55-CEF97813866D">
-        <omgdi:waypoint x="475.0" y="481.0"></omgdi:waypoint>
-        <omgdi:waypoint x="475.0" y="638.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="492.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="662.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-7DC40A3D-B145-4FD2-AC5B-E4DB65594A57" id="BPMNEdge_sid-7DC40A3D-B145-4FD2-AC5B-E4DB65594A57">
-        <omgdi:waypoint x="525.0" y="678.0"></omgdi:waypoint>
-        <omgdi:waypoint x="570.0" y="678.0"></omgdi:waypoint>
+        <omgdi:waypoint x="460.0" y="702.0"></omgdi:waypoint>
+        <omgdi:waypoint x="570.0" y="702.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

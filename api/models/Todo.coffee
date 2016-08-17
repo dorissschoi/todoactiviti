@@ -59,7 +59,10 @@ module.exports =
 			defaultsTo: 'manual'
 			
 		procInsId:
-			type: 'string'	
+			type: 'string'
+			
+		procCreateDate:
+			type: 'datetime'		
 			
 		taskId:
 			type: 'string'	
