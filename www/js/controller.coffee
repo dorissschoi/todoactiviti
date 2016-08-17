@@ -28,8 +28,10 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			
 			createdBy: createdBy
 			
-	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, sortOrder) ->
+	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, sortOrder, progress) ->
 		_.extend $scope,
+			progress: progress
+			
 			ownedBy: ownedBy
 			
 			sortBy: sortBy
@@ -49,7 +51,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 				item.$save()
 					.catch (err) ->
 						alert err
-						collection.$refetch({params: {ownedBy: ownedBy, sort: sortBy }})								
+						collection.$refetch({params: {progress: progress, ownedBy: ownedBy, sort: sortBy }})								
 			
 			edit: (item) ->
 				$location.url "/todo/edit/#{item.id}"		
@@ -67,10 +69,10 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						sortOrder = "asc"
 		
 				sortBy = "#{field} #{sortOrder}"	
-				collection.$refetch({params: {ownedBy: ownedBy, sort: sortBy }}) 
+				collection.$refetch({params: {progress: progress, ownedBy: ownedBy, sort: sortBy }}) 
 				
 			loadMore: ->
-				collection.$fetch({params: {ownedBy: ownedBy, sort: sortBy}})
+				collection.$fetch({params: {progress: progress, ownedBy: ownedBy, sort: sortBy}})
 					.then ->
 						$scope.$broadcast('scroll.infiniteScrollComplete')
 					.catch alert								
@@ -83,7 +85,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			save: ->
 				$scope.model.$save()
 					.then ->
-						$location.url "/todo/weekList?ownedBy=me&sort=project desc"
+						$location.url "/todo/weekList?progress=0&ownedBy=me&sort=project desc"
 					.catch (err) ->
 						alert {data:{error: "Not authorized to edit."}}					
 		$scope.$on 'selectuser', (event, item) ->

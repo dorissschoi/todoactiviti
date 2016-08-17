@@ -57,13 +57,15 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					ret.$fetch()			
 		
 		$stateProvider.state 'app.list',
-			url: "/todo/weekList?ownedBy&sort&sortOrder"
+			url: "/todo/weekList?progress&ownedBy&sort&sortOrder"
 			cache: false
 			views:
 				'menuContent':
 					templateUrl: "templates/todo/list.html"
 					controller: 'ListCtrl'
 			resolve:
+				progress: ($stateParams) ->
+					return $stateParams.progress
 				ownedBy: ($stateParams) ->
 					return $stateParams.ownedBy
 				sortBy: ($stateParams) ->
@@ -75,9 +77,9 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 						return $stateParams.sortOrder	
 					
 				resources: 'resources'	
-				collection: (resources, ownedBy, sortBy) ->
+				collection: (resources, ownedBy, sortBy, progress) ->
 					ret = new resources.TodoList()
-					ret.$fetch({params: {ownedBy: ownedBy, sort: sortBy}})
+					ret.$fetch({params: {progress: progress, ownedBy: ownedBy, sort: sortBy}})
 		
 		$stateProvider.state 'app.listProcessdef',
 			url: "/todo/processdefList"
@@ -108,7 +110,7 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					ret.$fetch({params: {createdBy: createdBy}})		
 		
 					
-		$urlRouterProvider.otherwise('/todo/weekList?ownedBy=me&sort=project desc')				
+		$urlRouterProvider.otherwise('/todo/weekList?progress=0&ownedBy=me&sort=project desc')				
 		#$urlRouterProvider.otherwise('/todo/processdefList')
 		
 		

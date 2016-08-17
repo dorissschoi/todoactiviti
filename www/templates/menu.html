@@ -11,11 +11,14 @@
         <ion-item nav-clear menu-close href="#/todo/processdefList">
           {{'processdef' | translate}}
         </ion-item>
+        <ion-item nav-clear menu-close href="#/todo/weekList?progress=0&ownedBy=me&sort=project desc">
+          {{'mytask' | translate}}
+        </ion-item>
         <ion-item nav-clear menu-close href="#/todo/processinsList?createdBy=me">
           {{'myrunningprocins' | translate}}
         </ion-item>        
-        <ion-item nav-clear menu-close href="#/todo/weekList?ownedBy=me&sort=project desc">
-          {{'mytask' | translate}}
+        <ion-item nav-clear menu-close href="#/todo/weekList?progress=100&ownedBy=me&sort=project desc">
+          {{'compledtask' | translate}}
         </ion-item>
         <ion-item nav-clear menu-close href="#/todo/weekList?sort=project desc">
           {{'alltask' | translate}}
