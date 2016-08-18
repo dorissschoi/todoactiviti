@@ -107,7 +107,7 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				resources: 'resources'
 				collection: (resources, createdBy) ->
 					ret = new resources.ProcessinsList()
-					ret.$fetch({params: {createdBy: createdBy}})		
+					ret.$fetch()		
 		
 					
 		$urlRouterProvider.otherwise('/todo/weekList?progress=0&ownedBy=me&sort=project desc')				

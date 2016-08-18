@@ -1,27 +1,30 @@
 Promise = require 'promise'
 actionUtil = require 'sails/lib/hooks/blueprints/actionUtil'
 
+taskFilter = (task, myusername) ->
+	ret = []
+	_.each task.body.data, (record) ->
+		myproc = _.union( 
+			_.where(record.variables, {name: "createdBy", value: myusername}),
+			_.where(record.variables, {name: "ao", value: myusername}),
+			_.where(record.variables, {name: "ro", value: myusername}) 
+		)
+		nextHandler = _.findWhere(record.variables, {name: "nextHandler"})
+		createdAt = _.findWhere(record.variables, {name: "createdAt"})
+					
+		if myproc.length > 0 && nextHandler.value != myusername
+			_.extend record,
+				nextHandler: nextHandler.value
+				createdAt: createdAt.value
+			ret.push record
+	return ret
+	
 module.exports =
 	find: (req, res) ->
 		data = actionUtil.parseValues(req)
-		activiti.req "get", "#{sails.config.activiti.url.processinslist}?includeProcessVariables=true"
+		activiti.req "get", "#{sails.config.activiti.url.processinslist}?includeProcessVariables=true&start=#{data.skip}"
 			.then (task) ->
-				ret = []
-				
-				_.each task.body.data, (record) ->
-					myproc = _.union( 
-						_.where(record.variables, {name: "createdBy", value: req.user.username}),
-						_.where(record.variables, {name: "ao", value: req.user.username}),
-						_.where(record.variables, {name: "ro", value: req.user.username}) 
-					)
-					nextHandler = _.findWhere(record.variables, {name: "nextHandler"})
-					createdAt = _.findWhere(record.variables, {name: "createdAt"})
-					
-					if myproc.length > 0 && nextHandler.value != req.user.username
-						_.extend record,
-							nextHandler: nextHandler.value
-							createdAt: createdAt.value
-						ret.push record
+				ret = taskFilter task, req.user.username
 							
 				Promise.all ( _.map ret, (record) ->
 					activiti.getTaskDetail(record))
