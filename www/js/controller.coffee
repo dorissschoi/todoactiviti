@@ -97,15 +97,24 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		$scope.$on 'selectuser', (event, item) ->
 			$scope.model.ownedBy = item
 
+	.filter 'instancesFilter', ($ionicScrollDelegate)->
+		(collection, search) ->
+			if search
+				return _.filter collection, (item) ->
+					r = new RegExp(search, 'i')
+					r.test(item.name) or r.test(item.nextHandler)
+			else
+				return collection
+				
 	.filter 'todosFilter', ($ionicScrollDelegate)->
-		(collection, search, skip, count, limit) ->
+		(collection, search) ->
 			if search
 				return _.filter collection, (item) ->
 					r = new RegExp(search, 'i')
 					r.test(item.project) or r.test(item.task) or r.test(item.createdBy.username) or r.test(item.ownedBy.username)
 			else
 				return collection
-
+				
 	.filter 'UserSearchFilter', ->
 		(collection, search) ->
 			if search
