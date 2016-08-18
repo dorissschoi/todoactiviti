@@ -32,6 +32,7 @@ module.exports =
 				value: createdBy.username
 			,
 				name: 'createdAt'
+				type: 'date'
 				value: new Date	
 			]
 		@req "post", sails.config.activiti.url.processinslist, data
@@ -52,14 +53,9 @@ module.exports =
 				if _.isArray task
 					task = task[0]
 				
-				nextUser = ""	
-				_.each record.variables, (record) ->
-					if record.name == "nextHandler"
-						nextUser= record.value
 				_.extend record,
 					name: task.name	
 					createTime: task.createTime
-					nextHandler: nextUser			
 				return record
 			.catch (err) ->
 				sails.log.error err

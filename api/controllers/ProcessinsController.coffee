@@ -4,30 +4,32 @@ actionUtil = require 'sails/lib/hooks/blueprints/actionUtil'
 module.exports =
 	find: (req, res) ->
 		data = actionUtil.parseValues(req)
-
-		Promise
-			.all [ 
-				activiti.getMyProcIns("createdBy", req.user.username)
-				activiti.getMyProcIns("ro", req.user.username)
-				activiti.getMyProcIns("ao", req.user.username)
-			]
+		activiti.req "get", "#{sails.config.activiti.url.processinslist}?includeProcessVariables=true"
 			.then (task) ->
 				ret = []
-				_.each task, (value) ->
-					if value.body.size > 0
-						_.each value.body.data, (record) ->
-							ret.push record
-				ret = _.uniq ret			
+				
+				_.each task.body.data, (record) ->
+					myproc = _.union( 
+						_.where(record.variables, {name: "createdBy", value: req.user.username}),
+						_.where(record.variables, {name: "ao", value: req.user.username}),
+						_.where(record.variables, {name: "ro", value: req.user.username}) 
+					)
+					nextHandler = _.findWhere(record.variables, {name: "nextHandler"})
+					createdAt = _.findWhere(record.variables, {name: "createdAt"})
+					
+					if myproc.length > 0 && nextHandler.value != req.user.username
+						_.extend record,
+							nextHandler: nextHandler.value
+							createdAt: createdAt.value
+						ret.push record
+							
 				Promise.all ( _.map ret, (record) ->
 					activiti.getTaskDetail(record))
 				.then (result) ->
-					Promise.all ( _.map result, (record) ->
-						activiti.getInsVar(record, "nextHandler"))
-					.then (result) ->									
-						val =
-							count:		ret.length
-							results:	result
-						res.ok(val)
+					val =
+						count:		task.body.total
+						results:	result
+					res.ok(val)
 			.catch res.serverError
 			
 	create: (req, res) ->

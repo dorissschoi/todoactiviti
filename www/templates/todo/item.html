@@ -9,7 +9,7 @@
 	<div class="col col-75 todoleftheader">
 		<a ng-click="neworder('project')" class="pointer">
 			<div>{{'Project' | translate}}</div>
-			<div>{{'TaskName' | translate}},{{'Url' | translate}}</div>
+			<div>{{'TaskName' | translate}}</div>
 			<div>
 				{{'progress' | translate}},
 				<a ng-if="ownedBy != 'me'" ng-click="neworder('ownedBy')" class="pointer">{{'Assign' | translate}}</a>
@@ -18,8 +18,11 @@
 		</a>
 	</div>
 	<div class="col col-25 todorightheader">
-		<p><a ng-click="neworder('dateStart')" class="pointer">{{'datestart' | translate}}</a></p>
-	  	<p>{{'dateend' | translate}}</p>
+		<a ng-click="neworder('dateStart')" class="pointer">
+			<div>{{'procCreatedate' | translate}}</div>
+			<div>{{'datestart' | translate}}</div>
+			<div>{{'dateend' | translate}}</div>
+		</a>
 	</div>
 	
 </div>
@@ -40,8 +43,12 @@
 			  	</p>
 			  </div>
 			  <div class="col col-25 listview">
-			  	<p class="tododate">{{model.dateStart | date: 'dd-MM-yyyy'}}</p>
+			  	<div ng-if="!model.procCreateDate"></br></div>
+			  	<p class="tododate">{{model.procCreateDate | date: 'dd-MM-yyyy'}}</p>
+			  	
 			  	<div ng-if="!model.dateStart"></br></div>
+			  	<p class="tododate">{{model.dateStart | date: 'dd-MM-yyyy'}}</p>
+			  	<div ng-if="!model.dateEnd"></br></div>
 			  	<p class="tododate">{{model.dateEnd | date: 'dd-MM-yyyy'}}</p>
 			  </div>
 			</div>

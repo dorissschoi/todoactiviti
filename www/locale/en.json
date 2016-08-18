@@ -35,9 +35,9 @@
 	"dateexpect":		"Due date",
 	"datestart":		"Start date",
 	"dateend":			"End date",
+	"procCreatedate":	"Process Start Date",	
 	"createdBy":		"Created By",
 	"processdef":		"Process definition",
 	"runningprocins":	"Running process instance",
-	"myrunningprocins":	"My Running process instance",
 	"url":				"Url"		
 }

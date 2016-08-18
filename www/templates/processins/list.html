@@ -2,9 +2,7 @@
     <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
     </button>
     <h1 class='title'>
-    	<span ng-if="createdBy == 'me'">{{'myrunningprocins' | translate}}</span>
-    	<span ng-if="createdBy != 'me'">{{'runningprocins' | translate}}</span>    	
-    </h1>
+    	<span>{{'runningprocins' | translate}}</span>    </h1>
 </ion-header-bar>
 
 <ng-include src="'templates/processins/item.html'"></ng-include>

@@ -18,7 +18,10 @@ angular.module 'starter.model', ['PageableAR']
 						res.dateEnd = new Date(res.dateEnd)
 				if !_.isUndefined(res.dateExpect)
 					if !_.isNull(res.dateExpect)
-						res.dateExpect = new Date(res.dateExpect)						
+						res.dateExpect = new Date(res.dateExpect)
+				if !_.isUndefined(res.procCreateDate)
+					if !_.isNull(res.procCreateDate)
+						res.procCreateDate = new Date(res.procCreateDate)									
 				return res
 
 		# TodoList

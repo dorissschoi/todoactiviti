@@ -35,9 +35,9 @@
 	"dateexpect":	"預期日期",
 	"datestart":	"開始日期",
 	"dateend":		"完成日期",
+	"procCreatedate":"流程開始日期",
 	"createdBy":	"設定",
 	"processdef":	"流程定義",
 	"runningprocins":	"已開始流程",
-	"myrunningprocins":	"我的已開始流程",
 	"url":			"網址"
 }
