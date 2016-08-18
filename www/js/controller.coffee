@@ -28,6 +28,12 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			
 			createdBy: createdBy
 			
+			loadMore: ->
+				collection.$fetch()
+					.then ->
+						$scope.$broadcast('scroll.infiniteScrollComplete')
+					.catch alert			
+			
 	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, sortOrder, progress) ->
 		_.extend $scope,
 			progress: progress
