@@ -29,6 +29,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			createdBy: createdBy
 			
 			loadMore: ->
+				collection.state.skip = collection.state.skip + collection.state.limit
 				collection.$fetch()
 					.then ->
 						$scope.$broadcast('scroll.infiniteScrollComplete')
