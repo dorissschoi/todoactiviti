@@ -46,7 +46,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			collection: collection
 			
 			openurl: (item) ->
-				if item.type == 'manual'
+				if _.isUndefined(item.type) || item.type =='manual'
 					$location.url "/todo/edit/#{item.id}"
 				else
 					if item.url
