@@ -7,24 +7,24 @@
 <div class="row bar-subheader">
 	
 	<div class="col col-75 todoleftheader">
-		<a ng-click="neworder('project')" class="pointer">
+		
 			<div>{{'Project' | translate}}</div>
-			<div>{{'TaskName' | translate}},{{'Url' | translate}}</div>
+			<div>{{'TaskName' | translate}}</div>
 			<div>{{'Assign' | translate}}</div>
-		</a>
+		
 	</div>
 	<div class="col col-25 todorightheader">
-		<a ng-click="neworder('dateStart')" class="pointer">
+		
 			<div>{{'procCreatedate' | translate}}</div>
 			<div>{{'datestart' | translate}}</div>
 			<div></div>
-		</a>
+		
 	</div>
 </div>
 	
 <ion-content class="has-subheader">	
 	<ion-list>	
-		<ion-item class="todolist" ng-repeat="model in collection.models | instancesFilter:searchInstances">
+		<ion-item class="todolist" ng-repeat="model in collection.models | instancesFilter:searchInstances | orderBy:'-createdAt'">
 			<div class="instanceitem">
 			  <div class="col col-75 listview">
 			  	</br>
