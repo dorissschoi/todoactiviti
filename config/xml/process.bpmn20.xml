@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://activiti.org/test">
   <collaboration id="Collaboration">
-    <participant id="sid-B5E7F080-AED4-4CAF-B3EA-A557D071B6CC" name="eLeave" processRef="process"></participant>
+    <participant id="sid-B5E7F080-AED4-4CAF-B3EA-A557D071B6CC" name="eLeave" processRef="eLeave"></participant>
   </collaboration>
-  <process id="process" name="eLeave" isExecutable="true">
-    <laneSet id="laneSet_process">
+  <process id="eLeave" name="eLeave" isExecutable="true">
+    <laneSet id="laneSet_eLeave">
       <lane id="sid-626DDE99-5ABC-43DA-8099-E3635DC3F771" name="Apply">
         <flowNodeRef>sid-869B30BB-A49C-4392-B00C-ADE8B8C7DB12</flowNodeRef>
         <flowNodeRef>sid-436CB129-C8F9-4155-8242-5D6A6631B76E</flowNodeRef>
