@@ -4,57 +4,30 @@
 		<input type="search" placeholder="{{'Search' | translate}}" ng-model="searchTodos">
 	</label>
 </div>
-<div class="row bar-subheader">
-	
-	<div class="col col-75 todoleftheader">
-		<a ng-click="neworder('project')" class="pointer">
-			<div>{{'Project' | translate}}</div>
-			<div>{{'TaskName' | translate}}</div>
-			<div>
-				{{'progress' | translate}},
-				<a ng-if="ownedBy != 'me'" ng-click="neworder('ownedBy')" class="pointer">{{'Assign' | translate}}</a>
-				<a ng-if="ownedBy == 'me'" ng-click="neworder('createdBy')" class="pointer">{{'createdBy' | translate}}</a>
+<ion-content class="todolist">	
+	<ion-list>
+	<ion-item ng-repeat="model in collection.models | todosFilter:searchTodos "  >
+		<div class="row">
+			<div class="col">
+				<button ng-if="model.type==undefined || model.type == 'manual'"
+    				class="button button-icon ion-ios-body customIcon nocursor">
+    			</button>
+    
+    			<button ng-if="model.type!==undefined && model.type != 'manual'"
+    				class="button button-icon ion-ios-people customIcon" 
+    				>
+    			</button>
+				
 			</div>
-		</a>
-	</div>
-	<div class="col col-25 todorightheader">
-		<a ng-click="neworder('dateStart')" class="pointer">
-			<div>{{'procCreatedate' | translate}}</div>
-			<div>{{'datestart' | translate}}</div>
-			<div>{{'dateend' | translate}}</div>
-		</a>
-	</div>
-	
-</div>
-	
-<ion-content class="has-subheader">	
-	<ion-list>	
-		<ion-item class="todolist" ng-repeat="model in collection.models | todosFilter:searchTodos "  ng-click="openurl(model);">				
-			
-			<div class="todoitem">
-			  <div class="col col-75 listview">
-			  	<h2>{{model.project}}</h2>
-			  	<div ng-if="!model.project"></br></div>
-			  	<p>{{model.task}}</p>
-			  	
-			  	<p>{{model.progress}}%,
-			  		<span ng-if="ownedBy != 'me'" >{{model.ownedBy.username}}</span>
-			  		<span ng-if="ownedBy == 'me'" >{{model.createdBy.username}}</span>
+			<div class="col col-90" ng-click="openurl(model);">
+				<h2>{{model.task}}</h2>
+				<p>{{model.ownedBy.username}}, {{model.dateStart | date: 'dd-MM-yyyy'}}
 			  	</p>
-			  </div>
-			  <div class="col col-25 listview">
-			  	<div ng-if="!model.procCreateDate"></br></div>
-			  	<p class="tododate">{{model.procCreateDate | date: 'dd-MM-yyyy'}}</p>
-			  	
-			  	<div ng-if="!model.dateStart"></br></div>
-			  	<p class="tododate">{{model.dateStart | date: 'dd-MM-yyyy'}}</p>
-			  	<div ng-if="!model.dateEnd"></br></div>
-			  	<p class="tododate">{{model.dateEnd | date: 'dd-MM-yyyy'}}</p>
-			  </div>
 			</div>
-			<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); edit(model);">Edit</ion-option-button>
-			<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">Delete</ion-option-button>
-		</ion-item>
+		</div>
+		<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); edit(model);">Edit</ion-option-button>
+		<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">Delete</ion-option-button>
+	</ion-item>
 	</ion-list>
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
 	</ion-infinite-scroll>	

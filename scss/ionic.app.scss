@@ -78,8 +78,11 @@ iframe {
     text-overflow: ellipsis; 
     display: inline-block;
 }
+.customIcon {
+	font-size: 50px;
+}
 .todolist {
-	height: 74px;
+	top: 90px;
 }
 .todorightheader {
 	margin: -5px 0px 0px 2px;
@@ -98,7 +101,13 @@ iframe {
 }
 .pointer {
 	cursor: pointer;
-}		 
+}		
+.nocursor {
+	cursor:default;
+} 
+.popup-container .popup {
+	width: 80%;
+}
 /* todo list view header*/
 a.icon.ion-arrow-down-b {
     color: black;

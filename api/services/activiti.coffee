@@ -80,4 +80,12 @@ module.exports =
 						nextHandler: res.body.value			
 					return record
 			.catch (err) ->
-				sails.log.error err							
+				sails.log.error err		
+
+	delIns: (procInsId) ->
+		@req "delete", "#{sails.config.activiti.url.processinslist}/#{procInsId}"
+			.then (res) ->
+				if res.statusCode == 204
+					return res.body
+			.catch (err) ->
+				sails.log.error err									

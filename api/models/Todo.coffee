@@ -83,4 +83,10 @@ module.exports =
 			values.dateEnd = new Date()
 
 		return cb null, values 
-			 
+
+	afterDestroy: (values, cb) ->
+		if _.isArray values
+			values = values[0]
+		if values.type == 'activiti'
+			activiti.delIns values.procInsId
+		return cb null, values			 

@@ -4,44 +4,29 @@
 		<input type="search" placeholder="{{'Search' | translate}}" ng-model="searchInstances">
 	</label>
 </div>
-<div class="row bar-subheader">
+
 	
-	<div class="col col-75 todoleftheader">
-		
-			<div>{{'Project' | translate}}</div>
-			<div>{{'TaskName' | translate}}</div>
-			<div>{{'Assign' | translate}}</div>
-		
-	</div>
-	<div class="col col-25 todorightheader">
-		
-			<div>{{'procCreatedate' | translate}}</div>
-			<div>{{'datestart' | translate}}</div>
-			<div></div>
-		
-	</div>
-</div>
-	
-<ion-content class="has-subheader">	
+<ion-content class="todolist">	
 	<ion-list>	
-		<ion-item class="todolist" ng-repeat="model in collection.models | instancesFilter:searchInstances | orderBy:'-createdAt'">
-			<div class="instanceitem">
-			  <div class="col col-75 listview">
-			  	</br>
-			  	<p>{{model.name}}</p>
-			  	<p><span>{{model.nextHandler}}</span></p>
-			  </div>
-			  <div class="col col-25 listview">
-			  	<p class="tododate">{{model.createdAt | date: 'dd-MM-yyyy'}}</p>
-			  	<p class="tododate">{{model.createTime | date: 'dd-MM-yyyy'}}</p>
-			  	</br>
-			  </div>
+		
+		<ion-item ng-repeat="model in collection.models | instancesFilter:searchInstances | orderBy:'-createdAt'">
+
+		<div class="row">
+			<div class="col">
+    			<button class="button button-icon ion-ios-people customIcon nocursor">
+    			</button>
+				
 			</div>
+			<div class="col col-90" >
+				<h2>{{model.name}}</h2>
+				<p>{{model.nextHandler}}, {{model.createTime | date: 'dd-MM-yyyy'}}
+			  	</p>
+			</div>
+		</div>
 	
 		</ion-item>
 	</ion-list>
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
 	</ion-infinite-scroll>
 </ion-content>
-
 

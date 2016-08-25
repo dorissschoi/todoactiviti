@@ -39,7 +39,19 @@ module.exports =
 				if err
 					return reject err
 				fulfill res
-					
+
+	delete: (token, url, opts) ->
+		new Promise (fulfill, reject) ->
+			if _.isUndefined opts
+				opts = _.extend options, sails.config.http.opts,
+					headers:
+						Authorization:	"Bearer #{token}"
+						
+			http.delete url, {}, opts, (err, res) ->
+				if err
+					return reject err
+				fulfill res
+									
 	push: (token, roster, msg) ->
 		param =
 			roster: roster
