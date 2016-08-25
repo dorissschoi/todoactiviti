@@ -2,9 +2,16 @@
 	
 <ion-content class="">	
 	<ion-list>	
-		<ion-item class="processdeflist" ng-repeat="model in collection.models"  on-tap="$event.stopPropagation(); read('{{model.id}}');">				
-			<div class="listview">{{model.name}}</div>
-			<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); startProcess(model);">Start</ion-option-button>
+		<ion-item class="processdeflist" ng-repeat="model in collection.models"  on-tap="$event.stopPropagation(); read('{{model.id}}');">
+			<div class="row">
+				<div class="col col-75">
+					<span class="name">{{model.name}}</span><br>
+      				<p><i class="icon ion-document"></i>&nbsp;<b>Version {{model.version}}</b>&nbsp;&nbsp;<i class="icon ion-clock"></i>&nbsp;<b>Deployed {{ model.deploymentDetails.deploymentTime | contextualDate }}</b></p> 
+				</div>
+  				<div class="col text-right">
+			    	<button class="button button-small button-balanced" on-tap="$event.stopPropagation(); startProcess(model);">Start process</button>			    	
+			    </div>
+			</div>
 		</ion-item>
 	</ion-list>
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">

@@ -6,7 +6,9 @@ module.exports.activiti =
 		processinslist: "#{serverurl}/runtime/process-instances"
 		processdeflist: "#{serverurl}/repository/process-definitions?category=http://activiti.org/test&latest=true"
 		runninglist: "#{serverurl}/runtime/tasks"
-		queryinslist: "#{serverurl}/query/process-instances" 
+		queryinslist: "#{serverurl}/query/process-instances"
+		deployment: (id) ->
+			"#{serverurl}/repository/deployments/#{id}"
 			
 	username:	'kermit'
 	password:	'kermit'

@@ -2,7 +2,10 @@ env = require './env.coffee'
 
 require './model.coffee'
 
-angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCordova',  'starter.model', 'platform']
+angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCordova',  'starter.model', 'platform', 'angular-contextual-date']
+
+	.run (contextualDateService) -> 
+		contextualDateService.config.hideFullDate = true
 
 	.controller 'MenuCtrl', ($scope) ->
 		$scope.env = env
