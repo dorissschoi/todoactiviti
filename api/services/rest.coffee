@@ -1,6 +1,6 @@
 http = require 'needle'
 fs = require 'fs'
-Promise = require 'promise'
+Promise = require 'bluebird'
 
 dir = '/etc/ssl/certs'
 files = fs.readdirSync(dir).filter (file) -> /.*\.pem/i.test(file)
@@ -10,20 +10,20 @@ ca = files.map (file) -> fs.readFileSync file
 options = 
 	timeout:	sails.config.promise.timeout
 	ca:			ca
+tokenOptions = _.clone options	
 		
 module.exports =
-
+				
 	get: (token, url, opts) ->
 		new Promise (fulfill, reject) ->
 			if _.isUndefined opts
 				opts = _.extend options, sails.config.http.opts,
 					headers:
 						Authorization:	"Bearer #{token}"
-			optsGet = _.omit opts, 'Content-Type', 'username', 'password'		
+				opts = _.omit opts, 'Content-Type', 'username', 'password'
 			
-			#sails.log "optsGet: " + JSON.stringify optsGet
-					
-			http.get url, optsGet, (err, res) ->
+			#sails.log "opts: " + JSON.stringify opts
+			http.get url, opts, (err, res) ->
 				if err
 					return reject err
 				fulfill res
@@ -94,7 +94,7 @@ module.exports =
 	#	secret:	user password
 	# scope:	[ "https://mob.myvnc.com/org/users", "https://mob.myvnc.com/mobile"]
 	token: (url, client, user, scope) ->
-		opts = _.extend options, sails.config.http.opts,
+		opts = _.extend tokenOptions, sails.config.http.opts,
 			headers =
 				'Content-Type':	'application/x-www-form-urlencoded'
 				username:		client.id

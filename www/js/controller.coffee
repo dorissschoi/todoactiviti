@@ -22,7 +22,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 					processdefID: item.id
 				process.$save()
 					.then () ->
-						$location.url "/todo/weekList?progress=0&ownedBy=me&sort=project desc"
+						$location.url "/todo/processinsList"
 					
 	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources, createdBy) ->
 		_.extend $scope,
@@ -38,7 +38,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						$scope.$broadcast('scroll.infiniteScrollComplete')
 					.catch alert			
 			
-	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, sortOrder, progress) ->
+	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, sortOrder, progress, $ionicPopup, resources) ->
 		_.extend $scope,
 			progress: progress
 			
@@ -54,7 +54,21 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 				else
 					if item.url
 						window.open(item.url, '_blank')
-							
+		
+			opendiagram: (item) ->
+				piModel = new resources.Processins id: item.procInsId
+				piModel.$fetch()
+					.then (data)->
+						src = new Buffer(data).toString('base64')
+						src = "data:image/png;base64,#{src}"
+						myPopup = $ionicPopup.show(
+							template: '<img src=' + src + '>'
+							title: 'Diagram'
+							scope: $scope
+							buttons: [
+								{ text: 'Cancel' }
+							])					
+					
 			completeTask: (item) ->
 				item.progress = 100
 				item.dateEnd = new Date

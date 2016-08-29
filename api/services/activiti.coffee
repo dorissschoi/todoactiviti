@@ -1,4 +1,4 @@
-Promise = require 'promise'
+Promise = require 'bluebird'
 		
 taskCompleted = (taskId, currHandler) ->
 	data =
@@ -12,12 +12,13 @@ taskCompleted = (taskId, currHandler) ->
 
 module.exports =
 
-	req: (method, url, data) ->
-		opts = 
-			headers:
-				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
-				'Content-Type': 'application/json'
-			json: true
+	req: (method, url, data, opts) ->
+		if _.isUndefined opts
+			opts = 
+				headers:
+					Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
+					'Content-Type': 'application/json'
+				json: true
 
 		sails.services.rest[method] {}, url, opts, data
 		
@@ -88,4 +89,12 @@ module.exports =
 				if res.statusCode == 204
 					return res.body
 			.catch (err) ->
-				sails.log.error err									
+				sails.log.error err		
+
+	getProcInsDiagram: (procInsId) ->
+		opts = 
+			headers:
+				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
+				'Content-Type': 'image/png'
+			timeout:	sails.config.promise.timeout	
+		@req "get", "#{sails.config.activiti.url.processinslist}/#{procInsId}/diagram", {}, opts

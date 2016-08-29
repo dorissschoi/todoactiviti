@@ -1,4 +1,4 @@
-Promise = require 'promise'
+Promise = require 'bluebird'
 actionUtil = require 'sails/lib/hooks/blueprints/actionUtil'
 
 taskFilter = (task, myusername) ->
@@ -12,7 +12,8 @@ taskFilter = (task, myusername) ->
 		nextHandler = _.findWhere(record.variables, {name: "nextHandler"})
 		createdAt = _.findWhere(record.variables, {name: "createdAt"})
 					
-		if myproc.length > 0 && nextHandler.value != myusername
+		#if myproc.length > 0 && nextHandler.value != myusername
+		if myproc.length > 0
 			_.extend record,
 				nextHandler: nextHandler.value
 				createdAt: createdAt.value
@@ -40,4 +41,11 @@ module.exports =
 
 		activiti.startProcIns data.processdefID, req.user
 			.then res.ok				
+			.catch res.serverError
+
+	getDiagram: (req, res) ->
+		data = actionUtil.parseValues(req)
+		activiti.getProcInsDiagram data.procInsId
+			.then (stream) ->
+				res.ok(stream.raw)
 			.catch res.serverError
