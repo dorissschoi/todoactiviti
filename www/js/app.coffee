@@ -64,6 +64,7 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					templateUrl: "templates/todo/list.html"
 					controller: 'ListCtrl'
 			resolve:
+				resources: 'resources'
 				progress: ($stateParams) ->
 					return $stateParams.progress
 				ownedBy: ($stateParams) ->

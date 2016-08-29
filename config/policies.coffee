@@ -17,4 +17,9 @@ module.exports =
 			find:		['isAuth']
 			findOne:	['isAuth']		
 			create: 	['isAuth', 'setCreatedBy']
-		
+			getDiagram:	true
+		ProcessdefController:
+			'*':		false
+			find:		['isAuth']
+			findOne:	['isAuth']		
+				
