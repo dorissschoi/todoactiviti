@@ -1,15 +1,15 @@
 
 	
 <ion-content class="">	
-	<ion-list>	
-		<ion-item class="processdeflist" ng-repeat="model in collection.models"  on-tap="$event.stopPropagation(); read('{{model.id}}');">
+	<ion-list>
+		<ion-item class="processdeflist" ng-repeat="model in collection.models"  on-tap="$event.stopPropagation(); read('{{model.id}}');" ng-class-odd="'odd'" ng-class-even="'even'">
 			<div class="row">
 				<div class="col col-75">
 					<span class="name">{{model.name}}</span><br>
-      				<p><i class="icon ion-document"></i>&nbsp;<b>Version {{model.version}}</b>&nbsp;&nbsp;<i class="icon ion-clock"></i>&nbsp;<b>Deployed {{ model.deploymentDetails.deploymentTime | contextualDate }}</b></p> 
+      				<span class="desc"><i class="icon ion-document"></i>&nbsp;v{{model.version}}&nbsp;&nbsp;&nbsp;<i class="icon ion-clock"></i>&nbsp;Deployed {{ model.deploymentDetails.deploymentTime | contextualDate }}
 				</div>
   				<div class="col text-right">
-			    	<button class="button button-small button-balanced" on-tap="$event.stopPropagation(); startProcess(model);">Start process</button>			    	
+			    	<button class="button button-positive" on-tap="$event.stopPropagation(); startProcess(model);">Start</button>			    	
 			    </div>
 			</div>
 		</ion-item>

@@ -22,7 +22,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 					processdefID: item.id
 				process.$save()
 					.then () ->
-						$location.url "/todo/processinsList"
+						$location.url "/todo/weekList?progress=0&ownedBy=me&sort=project desc"
 					
 	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources, createdBy) ->
 		_.extend $scope,
