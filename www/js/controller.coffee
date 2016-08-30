@@ -11,18 +11,19 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		$scope.env = env
 		$scope.navigator = navigator
 
-	.controller 'ListProcessdefCtrl', ($scope, collection, resources, $location) ->
+	.controller 'ListProcessdefCtrl', ($scope, collection, resources, $location, $ionicModal) ->				
 		_.extend $scope,
 			
 			collection: collection
 			
-			# save model backend call post
-			startProcess: (item) ->
-				process = new resources.Processins
-					processdefID: item.id
-				process.$save()
-					.then () ->
-						$location.url "/todo/processinsList"
+			$ionicModal.fromTemplateUrl('templates/modal.html', {
+				scope: $scope
+			}).then (modal) ->
+				$scope.modal = modal;
+			
+			openModal: ->
+				$scope.modal.show()
+				$scope.imgUrl = "http://10.30.224.82:8011/activiti-rest/service/repository/deployments/5010/resourcedata/eLeave.eLeave.png"
 					
 	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources, createdBy) ->
 		_.extend $scope,

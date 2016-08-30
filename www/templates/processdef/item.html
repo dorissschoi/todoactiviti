@@ -2,7 +2,7 @@
 	
 <ion-content class="">	
 	<ion-list>
-		<ion-item class="processdeflist" ng-repeat="model in collection.models"  on-tap="$event.stopPropagation(); read('{{model.id}}');" ng-class-odd="'odd'" ng-class-even="'even'">
+		<ion-item class="processdeflist" ng-repeat="model in collection.models" on-click="$event.stopPropagation(); openModal();" on-tap="$event.stopPropagation(); openModal();" ng-class-odd="'odd'" ng-class-even="'even'">
 			<div class="row">
 				<div class="col col-75">
 					<span class="name">{{model.name}}</span><br>
