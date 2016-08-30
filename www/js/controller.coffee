@@ -16,14 +16,27 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			
 			collection: collection
 			
+			# save model backend call post
+			startProcess: (item) ->
+				process = new resources.Processins
+					processdefID: item.id
+				process.$save()
+					.then () ->
+						$location.url "/todo/processinsList"
+									
 			$ionicModal.fromTemplateUrl('templates/modal.html', {
 				scope: $scope
 			}).then (modal) ->
 				$scope.modal = modal;
 			
-			openModal: ->
-				$scope.modal.show()
-				$scope.imgUrl = "http://10.30.224.82:8011/activiti-rest/service/repository/deployments/5010/resourcedata/eLeave.eLeave.png"
+			openModal: (item) ->
+				pdModel = new resources.Processdef id: item.deploymentId
+				pdModel.$fetch()
+					.then (data)->
+						$scope.modal.show()	
+						src = new Buffer(data).toString('base64')
+						src = "data:image/png;base64,#{src}"
+						$scope.imgUrl = src
 					
 	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources, createdBy) ->
 		_.extend $scope,
@@ -39,7 +52,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						$scope.$broadcast('scroll.infiniteScrollComplete')
 					.catch alert			
 			
-	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, sortOrder, progress, $ionicPopup, resources) ->
+	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, sortOrder, progress, $ionicPopup, resources, $ionicModal, $ionicListDelegate) ->
 		_.extend $scope,
 			progress: progress
 			
@@ -55,25 +68,27 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 				else
 					if item.url
 						window.open(item.url, '_blank')
-		
+
+			$ionicModal.fromTemplateUrl('templates/modal.html', {
+				scope: $scope
+			}).then (modal) ->
+				$scope.modal = modal;
+						
 			opendiagram: (item) ->
 				piModel = new resources.Processins id: item.procInsId
 				piModel.$fetch()
 					.then (data)->
+						$scope.modal.show()	
 						src = new Buffer(data).toString('base64')
 						src = "data:image/png;base64,#{src}"
-						myPopup = $ionicPopup.show(
-							template: '<img src=' + src + '>'
-							title: 'Diagram'
-							scope: $scope
-							buttons: [
-								{ text: 'Cancel' }
-							])					
-					
+						$scope.imgUrl = src
+						
 			completeTask: (item) ->
 				item.progress = 100
 				item.dateEnd = new Date
 				item.$save()
+					.then ->
+						$ionicListDelegate.closeOptionButtons()
 					.catch (err) ->
 						alert err
 						collection.$refetch({params: {progress: progress, ownedBy: ownedBy, sort: sortBy }})								

@@ -22,4 +22,4 @@ module.exports =
 			'*':		false
 			find:		['isAuth']
 			findOne:	['isAuth']		
-				
+			getDiagram:	true	

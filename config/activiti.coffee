@@ -4,7 +4,7 @@ module.exports.activiti =
 	
 	url:
 		processinslist: "#{serverurl}/runtime/process-instances"
-		processdeflist: "#{serverurl}/repository/process-definitions?category=http://activiti.org/test&latest=true"
+		processdeflist: "#{serverurl}/repository/process-definitions?category=http://activiti.org/test"
 		runninglist: "#{serverurl}/runtime/tasks"
 		queryinslist: "#{serverurl}/query/process-instances"
 		deployment: (id) ->

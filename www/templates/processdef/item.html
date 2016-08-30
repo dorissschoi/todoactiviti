@@ -2,16 +2,20 @@
 	
 <ion-content class="">	
 	<ion-list>
-		<ion-item class="processdeflist" ng-repeat="model in collection.models" on-click="$event.stopPropagation(); openModal();" on-tap="$event.stopPropagation(); openModal();" ng-class-odd="'odd'" ng-class-even="'even'">
+		<ion-item class="processdeflist" ng-repeat="model in collection.models" on-click="$event.stopPropagation(); ">
 			<div class="row">
-				<div class="col col-75">
-					<span class="name">{{model.name}}</span><br>
-      				<span class="desc"><i class="icon ion-document"></i>&nbsp;v{{model.version}}&nbsp;&nbsp;&nbsp;<i class="icon ion-clock"></i>&nbsp;Deployed {{ model.deploymentDetails.deploymentTime | contextualDate }}
+				<div class="col">
+				<a class="icon-circle activitiIcon" ng-click="openModal(model)">
+          			<i class="ion-wrench"></i>
+          		</a>
 				</div>
-  				<div class="col text-right">
-			    	<button class="button button-positive" on-tap="$event.stopPropagation(); startProcess(model);">Start</button>			    	
-			    </div>
+				<div class="col col-90">
+					<h2>{{model.name}}</h2>
+					<p>v{{model.version}}, Deployed {{ model.deploymentDetails.deploymentTime | date: 'dd-MM-yyyy' }}
+			  		</p>
+				</div>
 			</div>
+		<ion-option-button class="button button-balanced icon-left ion-checkmark" on-tap="$event.stopPropagation(); startProcess(model);">Start</ion-option-button>	
 		</ion-item>
 	</ion-list>
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">

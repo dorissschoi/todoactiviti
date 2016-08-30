@@ -98,3 +98,11 @@ module.exports =
 				'Content-Type': 'image/png'
 			timeout:	sails.config.promise.timeout	
 		@req "get", "#{sails.config.activiti.url.processinslist}/#{procInsId}/diagram", {}, opts
+
+	getProcDefDiagram: (contentUrl) ->
+		opts = 
+			headers:
+				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
+				'Content-Type': 'image/png'
+			timeout:	sails.config.promise.timeout	
+		@req "get", contentUrl, {}, opts		

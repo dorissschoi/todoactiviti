@@ -19,4 +19,14 @@ module.exports =
 							count:		processdefList.body.total
 							results:	result
 						res.ok(val)
-			.catch res.serverError			
+			.catch res.serverError
+
+	getDiagram: (req, res) ->
+		data = actionUtil.parseValues(req)
+		activiti.req 'get', "#{sails.config.activiti.url.deployment data.deploymentId}/resources"
+			.then (processdefList) ->
+				result = _.findWhere(processdefList.body,{type: 'resource'})
+				activiti.getProcDefDiagram result.contentUrl
+					.then (stream) ->
+						res.ok(stream.raw)
+			.catch res.serverError						
