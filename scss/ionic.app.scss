@@ -54,9 +54,11 @@ span.input-label {
 
 
 /* util.auth */
-.scroll {
+
+.scroll-content > .scroll {
 	height: 100%;
 }
+
 iframe {
 	width: 100%;
 	height: 100%;	
@@ -84,6 +86,9 @@ iframe {
 .activitiIcon {
 	background: #00a1e1;
 }
+.activitiEndIcon {
+	background: #AAAAAA;
+}
 .icon-circle{
 	position: relative;
 	display: inline-block;
@@ -102,24 +107,8 @@ iframe {
 .todolist {
 	top: 90px;
 }
-.todorightheader {
-	margin: -5px 0px 0px 2px;
-}
-.todoleftheader {
-	margin: -6px 6px -6px -5px;
-}
-.todoitem {
-	margin: -16px -49px -16px -16px;
-}
-.instanceitem {
-	margin: -16px -14px -16px -16px;
-}
-.tododate {
-	margin: 0px -6px 0px -5px;
-}
-.pointer {
-	cursor: pointer;
-}		
+
+		
 .nocursor {
 	cursor:default;
 } 
@@ -144,10 +133,7 @@ input.todoCheckbox {
 	width: 20px;
 	position: relative;
 }
-/* todo progress field */
-.todoprogress{
-	padding: 6px 0 5px 16px;
-}
+
 
 .processdeflist .name {
 	font-size: 22px;
@@ -165,7 +151,7 @@ input.todoCheckbox {
 .even {
 	background-color: #f4f0ec;
 }
-
+/* activiti diagram zoom */
 .zoom-pane {
   width: 100%;
   height: 100%;

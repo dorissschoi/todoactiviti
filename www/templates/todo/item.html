@@ -16,12 +16,16 @@
           			<i class="ion-ios-person"></i>
           		</a>
           		
-    			<a class="icon-circle activitiIcon" 
-    				ng-if="model.type!==undefined && model.type != 'manual'"
+    			<a class="icon-circle activitiIcon"
+    				ng-if="model.type!==undefined && model.type != 'manual' && model.progress < 100"
     				ng-click="opendiagram(model)">
           			<i class="ion-ios-people"></i>
           		</a>
-				
+          		<a class="icon-circle nocursor activitiEndIcon" 
+    				ng-if="model.type!==undefined && model.type != 'manual' && model.progress == 100">
+          			<i class="ion-ios-people"></i>
+          		</a>
+
 			</div>
 			<div class="col col-90" ng-click="openurl(model);">
 				<h2>{{model.task}}</h2>

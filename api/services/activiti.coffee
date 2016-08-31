@@ -96,7 +96,7 @@ module.exports =
 			headers:
 				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
 				'Content-Type': 'image/png'
-			timeout:	sails.config.promise.timeout	
+				
 		@req "get", "#{sails.config.activiti.url.processinslist}/#{procInsId}/diagram", {}, opts
 
 	getProcDefDiagram: (contentUrl) ->
@@ -104,5 +104,5 @@ module.exports =
 			headers:
 				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
 				'Content-Type': 'image/png'
-			timeout:	sails.config.promise.timeout	
+				
 		@req "get", contentUrl, {}, opts		
