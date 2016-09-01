@@ -1,11 +1,16 @@
-
+<div>
+	<label class="item item-input">
+		<i class="icon ion-search placeholder-icon"></i>
+		<input type="search" placeholder="{{'Search' | translate}}" ng-model="searchDefinitions">
+	</label>
+</div>
 	
-<ion-content class="">	
+<ion-content class="todolist">	
 	<ion-list>
-		<ion-item class="processdeflist" ng-repeat="model in collection.models" on-click="$event.stopPropagation(); ">
+		<ion-item class="processdeflist" ng-repeat="model in collection.models | definitionsFilter:searchDefinitions | orderBy:'-name'" on-click="$event.stopPropagation(); ">
 			<div class="row">
 				<div class="col">
-				<a class="icon-circle activitiIcon" ng-click="openModal(model)">
+				<a class="icon-circle activitiIcon" ng-click="opendiagram(model)">
           			<i class="ion-wrench"></i>
           		</a>
 				</div>

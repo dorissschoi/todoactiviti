@@ -11,7 +11,9 @@ getDeploymentDetails = (procDef) ->
 
 module.exports =
 	find: (req, res) ->
-		activiti.req 'get', sails.config.activiti.url.processdeflist
+		data = actionUtil.parseValues(req)
+		activiti.req "get", "#{sails.config.activiti.url.processdeflist}&start=#{data.skip}"
+		#activiti.req 'get', sails.config.activiti.url.processdeflist
 			.then (processdefList) ->
 				Promise.all _.map processdefList.body.data, getDeploymentDetails
 					.then (result) ->

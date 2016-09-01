@@ -24,19 +24,19 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 					.then () ->
 						$location.url "/todo/processinsList"
 									
-			$ionicModal.fromTemplateUrl('templates/modal.html', {
-				scope: $scope
-			}).then (modal) ->
-				$scope.modal = modal;
-			
-			openModal: (item) ->
+			opendiagram: (item) ->
 				pdModel = new resources.Processdef id: item.deploymentId
 				pdModel.$fetch()
 					.then (data)->
-						$scope.modal.show()	
 						src = new Buffer(data).toString('base64')
 						src = "data:image/png;base64,#{src}"
-						$scope.imgUrl = src
+						$scope.$emit 'activitiImg', src 
+			
+			loadMore: ->
+				collection.$fetch()
+					.then ->
+						$scope.$broadcast('scroll.infiniteScrollComplete')
+					.catch alert						
 					
 	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources, createdBy) ->
 		_.extend $scope,
@@ -45,6 +45,14 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			
 			createdBy: createdBy
 			
+			opendiagram: (item) ->
+				piModel = new resources.Processins id: item.id
+				piModel.$fetch()
+					.then (data)->
+						src = new Buffer(data).toString('base64')
+						src = "data:image/png;base64,#{src}"
+						$scope.$emit 'activitiImg', src 
+				
 			loadMore: ->
 				collection.state.skip = collection.state.skip + collection.state.limit
 				collection.$fetch()
@@ -69,19 +77,13 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 					if item.url
 						window.open(item.url, '_blank')
 
-			$ionicModal.fromTemplateUrl('templates/modal.html', {
-				scope: $scope
-			}).then (modal) ->
-				$scope.modal = modal;
-						
 			opendiagram: (item) ->
 				piModel = new resources.Processins id: item.procInsId
 				piModel.$fetch()
 					.then (data)->
-						$scope.modal.show()	
 						src = new Buffer(data).toString('base64')
 						src = "data:image/png;base64,#{src}"
-						$scope.imgUrl = src
+						$scope.$emit 'activitiImg', src 
 						
 			completeTask: (item) ->
 				item.progress = 100
@@ -131,6 +133,16 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		$scope.$on 'selectuser', (event, item) ->
 			$scope.model.ownedBy = item
 
+
+	.filter 'definitionsFilter', ($ionicScrollDelegate)->
+		(collection, search) ->
+			if search
+				return _.filter collection, (item) ->
+					r = new RegExp(search, 'i')
+					r.test(item.name)
+			else
+				return collection
+				
 	.filter 'instancesFilter', ($ionicScrollDelegate)->
 		(collection, search) ->
 			if search

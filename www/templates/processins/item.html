@@ -13,7 +13,7 @@
 
 		<div class="row">
 			<div class="col">
-				<a class="icon-circle activitiIcon" >
+				<a class="icon-circle activitiIcon" ng-click="opendiagram(model)">
           			<i class="ion-ios-people"></i>
           		</a>
 				
@@ -30,4 +30,3 @@
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
 	</ion-infinite-scroll>
 </ion-content>
-
