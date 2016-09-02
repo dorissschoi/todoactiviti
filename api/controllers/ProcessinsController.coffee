@@ -17,7 +17,13 @@ taskFilter = (task, myusername) ->
 			_.extend record,
 				nextHandler: nextHandler.value
 				createdAt: createdAt.value
-			ret.push record
+				includeMe: true
+		else		
+			_.extend record,
+				nextHandler: nextHandler.value
+				createdAt: createdAt.value
+				includeMe: false
+		ret.push record
 	return ret
 	
 module.exports =

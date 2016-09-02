@@ -9,7 +9,7 @@
 <ion-content class="todolist">	
 	<ion-list>	
 		
-		<ion-item ng-repeat="model in collection.models | instancesFilter:searchInstances | orderBy:'-createdAt'">
+		<ion-item ng-repeat="model in collection.models | instancesMeFilter:searchInstances | instancesFilter:searchInstances | orderBy:'-createdAt'">
 
 		<div class="row">
 			<div class="col">

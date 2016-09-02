@@ -54,7 +54,6 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						$scope.$emit 'activitiImg', src 
 				
 			loadMore: ->
-				collection.state.skip = collection.state.skip + collection.state.limit
 				collection.$fetch()
 					.then ->
 						$scope.$broadcast('scroll.infiniteScrollComplete')
@@ -142,7 +141,12 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 					r.test(item.name)
 			else
 				return collection
-				
+
+	.filter 'instancesMeFilter', ($ionicScrollDelegate)->
+		(collection, search) ->
+				return _.filter collection, (item) ->
+					item.includeMe 
+								
 	.filter 'instancesFilter', ($ionicScrollDelegate)->
 		(collection, search) ->
 			if search
