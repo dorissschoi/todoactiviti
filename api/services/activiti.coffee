@@ -61,28 +61,6 @@ module.exports =
 			.catch (err) ->
 				sails.log.error err
 							
-	getMyProcIns: (varName, username) ->
-		data = 
-			variables: [{name: varName, value: username, operation: 'equals', type: 'string'}]
-		@req "post", sails.config.activiti.url.queryinslist, data
-			.then (res) ->
-				if res.statusCode == 200
-					return res
-				else
-					return new Error "Start activiti process instance failed"
-			.catch (err) ->
-				return err
-	
-	getInsVar: (record, varName) ->
-		@req "get", "#{sails.config.activiti.url.processinslist}/#{record.id}/variables/#{varName}"
-			.then (res) ->
-				if res.statusCode == 200
-					_.extend record,
-						nextHandler: res.body.value			
-					return record
-			.catch (err) ->
-				sails.log.error err		
-
 	delIns: (procInsId) ->
 		@req "delete", "#{sails.config.activiti.url.processinslist}/#{procInsId}"
 			.then (res) ->

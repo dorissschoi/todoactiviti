@@ -29,7 +29,7 @@
 			</div>
 			<div class="col col-90" ng-click="openurl(model);">
 				<h2>{{model.task}}</h2>
-				<p>{{model.ownedBy.username}}, {{model.dateStart | date: 'dd-MM-yyyy' }}
+				<p>{{model.ownedBy.username}}<span  ng-if="model.dateStart != null">,</span> {{model.dateStart | date: 'dd-MM-yyyy' }}
 			  	</p>
 			</div>
 		</div>

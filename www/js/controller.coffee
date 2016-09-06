@@ -22,7 +22,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 					processdefID: item.id
 				process.$save()
 					.then () ->
-						$location.url "/todo/processinsList"
+						$location.url "/todo/weekList?progress=0&ownedBy=me&sort=createdAt"
 									
 			opendiagram: (item) ->
 				pdModel = new resources.Processdef id: item.deploymentId
@@ -126,7 +126,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			save: ->
 				$scope.model.$save()
 					.then ->
-						$location.url "/todo/weekList?progress=0&ownedBy=me&sort=project desc"
+						$location.url "/todo/weekList?progress=0&ownedBy=me&sort=createdAt"
 					.catch (err) ->
 						alert {data:{error: "Not authorized to edit."}}					
 		$scope.$on 'selectuser', (event, item) ->

@@ -8,22 +8,21 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close href="#/todo/processdefList">
-          {{'processdef' | translate}}
-        </ion-item>
+        
         <ion-item nav-clear menu-close href="#/todo/weekList?progress=0&ownedBy=me&sort=project desc">
           {{'mytask' | translate}}
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/todo/weekList?progress=100&ownedBy=me&sort=project desc">
+          {{'compledtask' | translate}}
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/todo/processdefList">
+          {{'processdef' | translate}}
         </ion-item>
         <ion-item nav-clear menu-close href="#/todo/processinsList?createdBy=me">
           {{'runningprocins' | translate}}
         </ion-item>        
-        <ion-item nav-clear menu-close href="#/todo/weekList?progress=100&ownedBy=me&sort=project desc">
-          {{'compledtask' | translate}}
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/todo/weekList?sort=project desc">
-          {{'alltask' | translate}}
-        </ion-item>
-	    <ion-item nav-clear menu-close ng-if="env.isNative()" ng-click="navigator.app.exitApp()">
+        
+        <ion-item nav-clear menu-close ng-if="env.isNative()" ng-click="navigator.app.exitApp()">
           Exit
         </ion-item>
       </ion-list>
