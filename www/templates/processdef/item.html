@@ -7,14 +7,14 @@
 	
 <ion-content class="todolist">	
 	<ion-list>
-		<ion-item class="processdeflist" ng-repeat="model in collection.models | definitionsFilter:searchDefinitions | orderBy:'-name'" on-click="$event.stopPropagation(); ">
+		<ion-item class="processdeflist" ng-repeat="model in collection.models | definitionsFilter:searchDefinitions | orderBy:['name','-version']" on-click="$event.stopPropagation(); ">
 			<div class="row">
-				<div class="col col-25">
+				<div class="col">
 				<a class="icon-circle activitiIcon" ng-click="opendiagram(model)">
           			<i class="ion-wrench"></i>
           		</a>
 				</div>
-				<div class="col col-75">
+				<div class="col col-80">
 					<h2>{{model.name}}</h2>
 					<p>v{{model.version}}, {{ model.deploymentDetails.deploymentTime | date: 'dd-MM-yyyy' }}
 			  		</p>
