@@ -28,7 +28,7 @@ module.exports =
 		activiti.req 'get', "#{sails.config.activiti.url.deployment data.deploymentId}/resources"
 			.then (processdefList) ->
 				result = _.findWhere(processdefList.body,{type: 'resource'})
-				activiti.getProcDefDiagram result.contentUrl
+				activiti.getProcDefDiagram "#{sails.config.activiti.url.deployment data.deploymentId}/resourcedata/#{result.id}"
 					.then (stream) ->
 						res.ok(stream.raw)
 			.catch res.serverError						
