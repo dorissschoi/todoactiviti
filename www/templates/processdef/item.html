@@ -9,12 +9,12 @@
 	<ion-list>
 		<ion-item class="processdeflist" ng-repeat="model in collection.models | definitionsFilter:searchDefinitions | orderBy:'-name'" on-click="$event.stopPropagation(); ">
 			<div class="row">
-				<div class="col">
+				<div class="col col-25">
 				<a class="icon-circle activitiIcon" ng-click="opendiagram(model)">
           			<i class="ion-wrench"></i>
           		</a>
 				</div>
-				<div class="col col-90">
+				<div class="col col-75">
 					<h2>{{model.name}}</h2>
 					<p>v{{model.version}}, {{ model.deploymentDetails.deploymentTime | date: 'dd-MM-yyyy' }}
 			  		</p>
