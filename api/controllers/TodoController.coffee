@@ -13,7 +13,7 @@ module.exports =
 		Model = actionUtil.parseModel req
 		data = actionUtil.parseValues(req)
 		
-		if req.body.progress == 100 and req.body.type != 'manual'
+		if ( req.body.progress == 100 || parseInt(req.body.progress) == 100 ) && req.body.type != 'manual'
 			activiti.completeTask req.body.taskId, req.user
 		
 		Model.update({ id: req.body.id },data)
