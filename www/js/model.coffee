@@ -7,7 +7,7 @@ angular.module 'starter.model', ['PageableAR']
 		class Todo extends pageableAR.Model
 			$idAttribute: 'id'
 			
-			$urlRoot: "api/todo/"
+			$urlRoot: "api/todo"
 			
 			$parse: (res, opts) ->
 				if !_.isUndefined(res.dateStart)
@@ -29,12 +29,12 @@ angular.module 'starter.model', ['PageableAR']
 
 			model: Todo
 			
-			$urlRoot: "api/todo/"
+			$urlRoot: "api/todo"
 
 		class User extends pageableAR.Model
 			$idAttribute: 'username'
 			
-			$urlRoot: "api/user/"
+			$urlRoot: "api/user"
 			
 			_me = null
 			
@@ -46,30 +46,30 @@ angular.module 'starter.model', ['PageableAR']
 
 			model: User
 			
-			$urlRoot: "api/user/"
+			$urlRoot: "api/user"
 			
 						
 		class Processdef extends pageableAR.Model
 			$idAttribute: 'id'
 			
-			$urlRoot: "api/processdef/"
+			$urlRoot: "api/processdef"
 				
 		# ProcessdefList
 		class ProcessdefList extends pageableAR.PageableCollection
 			model: Processdef
 		
-			$urlRoot: "api/processdef/"
+			$urlRoot: "api/processdef"
 
 		class Processins extends pageableAR.Model
 			$idAttribute: 'id'
 			
-			$urlRoot: "api/processins/"
+			$urlRoot: "api/processins"
 		
 		# ProcessinsList
 		class ProcessinsList extends pageableAR.PageableCollection
 			model: Processins
 		
-			$urlRoot: "api/processins/"	
+			$urlRoot: "api/processins"	
 											
 		Todo:		Todo
 		TodoList:	TodoList
