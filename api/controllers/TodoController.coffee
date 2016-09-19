@@ -11,12 +11,16 @@ module.exports =
 		
 	update: (req, res) ->
 		Model = actionUtil.parseModel req
-		data = actionUtil.parseValues(req)
+		pk = actionUtil.requirePk req
+		values = actionUtil.parseValues req
 		
-		if ( req.body.progress == 100 || parseInt(req.body.progress) == 100 ) && req.body.type != 'manual'
+		if parseInt(req.body.progress) == 100
+			values.progress = parseInt(req.body.progress) 
+		if values.progress == 100 && req.body.type != 'manual'
 			activiti.completeTask req.body.taskId, req.user
 		
-		Model.update({ id: req.body.id },data)
-			.then (values) ->
+		Model.update(pk, values)
+			.then (updatedRecord) ->
 				res.ok()
-			.catch res.serverError	
+			.catch res.serverError
+		
