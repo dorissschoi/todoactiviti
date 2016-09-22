@@ -8,6 +8,7 @@ module.exports =
 			create: 	['isAuth', 'setCreatedBy' , 'setOwner']
 			update: 	['isAuth', 'canEdit']
 			destroy: 	['isAuth', 'canDestroy']
+			completeActiviti: ['isAuth']
 		UserController:
 			'*':		false
 			find:		true

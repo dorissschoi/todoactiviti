@@ -23,4 +23,24 @@ module.exports =
 			.then (updatedRecord) ->
 				res.ok()
 			.catch res.serverError
+
+	completeActiviti: (req, res) ->
+		pk = actionUtil.requirePk req
+		values = actionUtil.parseValues req
 		
+		sails.log.info "completeActiviti: #{JSON.stringify values}"
+		
+		sails.models.todo
+			.findOne()
+			.where(id: pk)
+			.populateAll()
+			.then (todo) ->
+				activiti.completeTask values.taskId, req.user
+					.then (rst) ->
+						sails.models.todo.update(pk, {progress: 100})
+							.then (updatedRecord) ->
+								res.ok()
+			.catch res.serverError		
+
+		
+				
