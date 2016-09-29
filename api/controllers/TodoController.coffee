@@ -35,7 +35,7 @@ module.exports =
 			.where(id: pk)
 			.populateAll()
 			.then (todo) ->
-				activiti.completeTask values.taskId, req.user
+				activiti.completeTask todo.taskId, req.user
 					.then (rst) ->
 						sails.models.todo.update(pk, {progress: 100})
 							.then (updatedRecord) ->
