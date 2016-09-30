@@ -1,5 +1,3 @@
-agent = require 'https-proxy-agent'
-
 module.exports =
 	hookTimeout:	400000
 	
@@ -9,10 +7,6 @@ module.exports =
 		verifyURL:			"https://mob.myvnc.com/org/oauth2/verify/"
 		tokenURL:			"https://mob.myvnc.com/org/oauth2/token/"
 		scope:				["https://mob.myvnc.com/org/users"]
-		
-	http:
-		opts:
-			agent:	new agent("http://proxy1.scig.gov.hk:8080")
 
 	promise:
 		timeout:	10000 # ms
@@ -25,7 +19,7 @@ module.exports =
 		mongo:
 			adapter:	'sails-mongo'
 			driver:		'mongodb'
-			url: 'mongodb://todosailsrw:pass1234@localhost/todosails' #dev
+			url: 'mongodb://todo_mongo/todoactiviti' #dev
 		
 	im:
 		url: 		"https://mob.myvnc.com/im.app/api/msg"

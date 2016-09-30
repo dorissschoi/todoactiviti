@@ -1,23 +1,7 @@
 version: '2'
 services:
-  todo_mongo:
-    image: mongo
-    container_name: todo_mongo
-    hostname: todo_mongo
-    ports:
-      - 27017
-    volumes:
-      - ${COMPOSEROOT}/data/todo_mongodata:/data/db
-      - ${COMPOSEROOT}/todoactiviti-82/mongoData:/tmp/mongodata
-    command: mongod --directoryperdb
-    env_file:
-      - ../.env 
     
   todo:
-    depends_on:
-      - activiti_mysql
-      - activiti
-      - todo_mongo
     image: dorissschoi/todoactiviti
     container_name: todo
     hostname: todo
@@ -26,50 +10,23 @@ services:
       - 8001:1337
       - 8002:8080
     volumes:
-      - ${COMPOSEROOT}/todoactiviti-82/config/env/development.coffee:/usr/src/app/config/env/development.coffee
-      - ${COMPOSEROOT}/todoactiviti-82/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
+      - ${COMPOSEROOT}/todoactiviti/config/env/development.coffee:/usr/src/app/config/env/development.coffee
+      - ${COMPOSEROOT}/todoactiviti/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
       - /etc/ssl/certs/mobile.ogcio.hksarg.pem:/etc/ssl/certs/mobile.ogcio.hksarg.pem
       - /usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt:/usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt
-      - ${COMPOSEROOT}/todoactiviti-82/entrypoint.sh:/usr/src/app/entrypoint.sh
-      - ${COMPOSEROOT}/todoactiviti-82:/usr/src/app
-     
+      - ${COMPOSEROOT}/todoactiviti/entrypoint.sh:/usr/src/app/entrypoint.sh
+      - ${COMPOSEROOT}/todoactiviti:/usr/src/app
+      
     env_file:
-      - ../.env 
-        
-  activiti_mysql:
-    hostname: activiti_mysql
-    container_name: activiti_mysql
-    image: mariadb  
-    ports:
-      - 3306
-    volumes:
-      - ${COMPOSEROOT}/data/activiti_mysqldata:/var/lib/mysql
-      - ${COMPOSEROOT}/todoactiviti-82/newmysqldata:/tmp/mysqldata
-    environment:
-      - MYSQL_ROOT_PASSWORD=pass1234
-      - MYSQL_DATABASE=activiti_production
-      - MYSQL_USER=activiti
-      - MYSQL_PASSWORD=pass1234
-    env_file:
-      - ../.env 
-  
-  activiti:
-    hostname: activiti
-    container_name: activiti
-    image: dorissschoi/activiti:latest
-    volumes:
-      - /etc/ssl/certs:/etc/ssl/certs       
-      - /usr/local/share/ca-certificates:/usr/local/share/ca-certificates
-
-    links:
-      - activiti_mysql:mysql
-    ports:
-      - 8003:8080  
-    environment:
-      - DB_HOST=activiti_mysql
-      - DB_PORT=3306
-      - DB_NAME=activiti_production
-      - DB_USER=activiti
-      - DB_PASS=pass1234
-    env_file:
-      - ../.env 
+      - ./.env 
+    external_links:
+      - todo_mongo
+    networks:
+      - activiti_default
+      - todomongo_default
+              
+networks:
+  activiti_default:
+    external: true
+  todomongo_default:
+    external: true  
