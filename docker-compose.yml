@@ -1,32 +1,34 @@
 version: '2'
 services:
     
-  todo:
+  todoactiviti:
     image: dorissschoi/todoactiviti
-    container_name: todo
-    hostname: todo
-    entrypoint: top -b -d 1000
+    container_name: todoactiviti
+    hostname: todoactiviti
+    #entrypoint: top -b -d 1000
     ports:
       - 8001:1337
       - 8002:8080
     volumes:
-      - ${COMPOSEROOT}/todoactiviti/config/env/development.coffee:/usr/src/app/config/env/development.coffee
-      - ${COMPOSEROOT}/todoactiviti/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
+      #- ${COMPOSEROOT}/todoactiviti-v1/config/env/development.coffee:/usr/src/app/config/env/development.coffee
+      - ${COMPOSEROOT}/todoactiviti-v1/config/env/development.coffee:/usr/src/app/config/env/production.coffee
+      #- ${COMPOSEROOT}/todoactiviti-v1/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
+      - ${COMPOSEROOT}/todoactiviti-v1/www/js/config/development.coffee:/usr/src/app/www/js/config/production.coffee
       - /etc/ssl/certs/mobile.ogcio.hksarg.pem:/etc/ssl/certs/mobile.ogcio.hksarg.pem
       - /usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt:/usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt
-      - ${COMPOSEROOT}/todoactiviti/entrypoint.sh:/usr/src/app/entrypoint.sh
-      - ${COMPOSEROOT}/todoactiviti:/usr/src/app
+      #- ${COMPOSEROOT}/todoactiviti-v1/entrypoint.sh:/usr/src/app/entrypoint.sh
+      #- ${COMPOSEROOT}/todoactiviti-v1:/usr/src/app
       
     env_file:
       - ./.env 
     external_links:
-      - todo_mongo
+      - todoactiviti_mongo
     networks:
       - activiti_default
-      - todomongo_default
+      - todoactivitimongo_default
               
 networks:
   activiti_default:
     external: true
-  todomongo_default:
-    external: true  
+  todoactivitimongo_default:
+    external: true    

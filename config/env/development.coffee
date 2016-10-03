@@ -19,7 +19,7 @@ module.exports =
 		mongo:
 			adapter:	'sails-mongo'
 			driver:		'mongodb'
-			url: 'mongodb://todo_mongo/todoactiviti' #dev
+			url: 'mongodb://todoactiviti_mongo/todoactiviti' #dev
 		
 	im:
 		url: 		"https://mob.myvnc.com/im.app/api/msg"
