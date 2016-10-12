@@ -20,7 +20,7 @@
 			  		</p>
 				</div>
 			</div>
-		<ion-option-button class="button button-balanced icon-left ion-checkmark" on-tap="$event.stopPropagation(); startProcess(model);">Start</ion-option-button>	
+		<ion-option-button class="button button-balanced icon-left ion-checkmark" on-tap="$event.stopPropagation(); startProcess(model);">{{'start' | translate}}</ion-option-button>	
 		</ion-item>
 	</ion-list>
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">

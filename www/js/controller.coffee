@@ -35,12 +35,10 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						$scope.$broadcast('scroll.infiniteScrollComplete')
 					.catch alert						
 					
-	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources, createdBy) ->
+	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources) ->
 		_.extend $scope,
 			
 			collection: collection
-			
-			createdBy: createdBy
 			
 			opendiagram: (item) ->
 				piModel = new resources.Processins id: item.id

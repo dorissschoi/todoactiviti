@@ -23,7 +23,8 @@ module.exports =
 			.then (updatedRecord) ->
 				res.ok()
 			.catch res.serverError
-
+			
+	#webhook
 	completeActiviti: (req, res) ->
 		pk = actionUtil.requirePk req
 		values = actionUtil.parseValues req
@@ -36,10 +37,10 @@ module.exports =
 			.populateAll()
 			.then (todo) ->
 				activiti.completeTask todo.taskId, req.user
-					.then (rst) ->
-						sails.models.todo.update(pk, {progress: 100})
-							.then (updatedRecord) ->
-								res.ok()
+			.then (rst) ->
+				sails.models.todo.update(pk, {progress: 100})
+			.then (updatedRecord) ->
+				res.ok()
 			.catch res.serverError		
 
 		

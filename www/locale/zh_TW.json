@@ -39,5 +39,9 @@
 	"createdBy":	"設定",
 	"processdef":	"流程定義",
 	"runningprocins":	"已開始流程",
-	"url":			"網址"
+	"url":			"網址",
+	"start":		"開始",
+	"delete":		"刪除",
+	"edit":			"修改",
+	"complete":		"完成"
 }

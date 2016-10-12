@@ -39,5 +39,9 @@
 	"createdBy":		"Created By",
 	"processdef":		"Process definition",
 	"runningprocins":	"Running process instance",
-	"url":				"Url"		
+	"url":				"Url",
+	"start":			"Start",
+	"delete":			"Delete",
+	"edit":				"Edit",
+	"complete":			"Complete"		
 }

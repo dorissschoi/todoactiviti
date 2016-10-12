@@ -112,10 +112,8 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					templateUrl: "templates/processins/list.html"
 					controller: 'ListProcessinsCtrl'
 			resolve:
-				createdBy: ($stateParams) ->
-					return $stateParams.createdBy
 				resources: 'resources'
-				collection: (resources, createdBy) ->
+				collection: (resources) ->
 					ret = new resources.ProcessinsList()
 					ret.$fetch()		
 		
