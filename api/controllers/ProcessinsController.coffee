@@ -11,18 +11,13 @@ taskFilter = (task, myusername) ->
 		)
 		nextHandler = _.findWhere(record.variables, {name: "nextHandler"})
 		createdAt = _.findWhere(record.variables, {name: "createdAt"})
-					
+		_.extend record,
+			nextHandler: nextHandler.value
+			createdAt: createdAt.value					
 		#if myproc.length > 0 && nextHandler.value != myusername
 		if myproc.length > 0
 			_.extend record,
-				nextHandler: nextHandler.value
-				createdAt: createdAt.value
 				includeMe: true
-		else		
-			_.extend record,
-				nextHandler: nextHandler.value
-				createdAt: createdAt.value
-				includeMe: false
 		ret.push record
 	return ret
 	
@@ -44,9 +39,12 @@ module.exports =
 			
 	create: (req, res) ->
 		data = actionUtil.parseValues(req)
-
 		activiti.startProcIns data.processdefID, req.user
-			.then res.ok				
+			.then (rst) ->
+				if rst.statusCode == 201
+					res.ok(rst.body) 
+				else 
+					res.notFound(rst.body)				
 			.catch res.serverError
 
 	getDiagram: (req, res) ->
