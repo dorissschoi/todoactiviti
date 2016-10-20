@@ -6,7 +6,7 @@
 </div>
 <ion-content class="todolist">	
 	<ion-list>
-	<ion-item ng-repeat="model in collection.models | todosFilter:searchTodos | orderBy:'-createdAt' "  >
+	<ion-item ng-repeat="model in collection.models | todosFilter:searchTodos  "  >
 		<div class="row">
 			<div class="col">
     
@@ -28,8 +28,8 @@
 
 			</div>
 			<div class="col col-80" ng-click="openurl(model);">
-				<h2>{{model.task}}</h2>
-				<p>{{model.ownedBy.username}}<span  ng-if="model.dateStart != null">,</span> {{model.dateStart | date: 'dd-MM-yyyy' }}
+				<h2><span  ng-if="model.project != null">{{model.project}} - </span>{{model.task}}</h2>
+				<p>{{model.ownedBy.username}}<span  ng-if="model.createdAt != null">,</span> {{model.createdAt | date: 'dd.MM.yyyy' }}
 			  	</p>
 			</div>
 		</div>

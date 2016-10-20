@@ -3,6 +3,7 @@
     "compledtask":		"Completed task",
     "tasklist":			"Task list",
     "mytask":			"My task",
+    "mytaskproj":		"My task (project)",
     "alltask":			"All task",    
     "addtask":			"Create task",
     "edittask":			"Edit task",

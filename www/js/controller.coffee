@@ -54,7 +54,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						$scope.$broadcast('scroll.infiniteScrollComplete')
 					.catch alert			
 			
-	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, sortOrder, progress, $ionicPopup, resources, $ionicModal, $ionicListDelegate) ->
+	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, progress, $ionicPopup, resources, $ionicModal, $ionicListDelegate) ->
 		_.extend $scope,
 			progress: progress
 			
@@ -95,18 +95,6 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			delete: (item) ->
 				collection.remove item
 			
-			order: (field) ->
-				$rootScope.sort = field 
-			
-			neworder: (field) ->
-				if !sortOrder.localeCompare("asc")
-						sortOrder = "desc"
-					else 
-						sortOrder = "asc"
-		
-				sortBy = "#{field} #{sortOrder}"	
-				collection.$refetch({params: {progress: progress, ownedBy: ownedBy, sort: sortBy }}) 
-				
 			loadMore: ->
 				collection.$fetch({params: {progress: progress, ownedBy: ownedBy, sort: sortBy}})
 					.then ->

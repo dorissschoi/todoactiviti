@@ -79,12 +79,13 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				ownedBy: ($stateParams) ->
 					return $stateParams.ownedBy
 				sortBy: ($stateParams) ->
-					return $stateParams.sort
-				sortOrder: ($stateParams) ->
-					if _.isUndefined($stateParams.sortOrder)
-						return 'asc'
-					else 
-						return $stateParams.sortOrder	
+					if $stateParams.sort == 'createdAt'
+						sort = 'createdAt DESC'
+					else
+						sort = 
+							'project':1
+							'createdAt':0
+					return sort
 					
 				resources: 'resources'	
 				collection: (resources, ownedBy, sortBy, progress) ->

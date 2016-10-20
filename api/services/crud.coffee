@@ -21,21 +21,8 @@ module.exports =
 		Model = actionUtil.parseModel req
 		cond = actionUtil.parseCriteria req
 		
-		sails.log "cond: #{JSON.stringify cond}"
-		
-		sortBy = actionUtil.parseSort(req)
-		if !_.isUndefined sortBy
-			if sortBy.indexOf("project") > -1
-				if sortBy.indexOf("asc") > -1
-					sortBy = 
-						"project":0
-						"task":1
-				else
-					sortBy = 
-						"project":1
-						"task":1
-			
-		sails.log "sortBy: #{JSON.stringify sortBy}"
+		sails.log.debug "cond: #{JSON.stringify cond}"
+		sails.log.debug "sortBy: #{JSON.stringify actionUtil.parseSort(req)}"
 		
 		count = Model.count()
 			.where( cond )
@@ -45,7 +32,7 @@ module.exports =
 			.populateAll()
 			.limit( actionUtil.parseLimit(req) )
 			.skip( actionUtil.parseSkip(req) )
-			.sort( sortBy )
+			.sort( actionUtil.parseSort(req) )
 			.toPromise()
 		
 		new Promise (fulfill, reject) ->
