@@ -32,8 +32,7 @@ module.exports =
 		sails.log.info "completeActiviti: #{JSON.stringify values}"
 		
 		sails.models.todo
-			.findOne()
-			.where(id: pk)
+			.findOne(pk)
 			.populateAll()
 			.then (todo) ->
 				activiti.completeTask todo.taskId, req.user
@@ -44,4 +43,19 @@ module.exports =
 			.catch res.serverError		
 
 		
-				
+	destroy: (req, res) ->
+		pk = actionUtil.requirePk req
+		Model = actionUtil.parseModel req
+		
+		Model.findOne(pk)
+			.populateAll()
+			.then (result) ->
+				if result.type == 'activiti'
+					activiti.delIns result.procInsId
+					Model.destroy({procInsId: result.procInsId})
+				else	
+					Model.destroy(pk)
+			.then (result) ->
+				res.ok()	
+			.catch res.serverError	
+		
