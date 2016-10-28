@@ -1,5 +1,6 @@
 <ion-header-bar class="item-input-inset">
-    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    <button class="button button-icon button-clear ion-navicon button-stable" menu-toggle="left">
+    
     </button>
     <h1 class='title'> 
     	<span ng-if="progress == '0' && sortBy == 'createdAt DESC'">{{'mytask' | translate}}</span>
@@ -7,7 +8,7 @@
     	<span ng-if="progress != '0'">{{'compledtask' | translate}}</span>
 
     </h1>
-    <button class="button ion-plus-round button-clear" ui-sref="app.createTodo"></button>  
+    <button class="button ion-plus-round button-clear button-stable" ui-sref="app.createTodo"></button>  
 </ion-header-bar>
 
 <ng-include src="'templates/todo/item.html'"></ng-include>

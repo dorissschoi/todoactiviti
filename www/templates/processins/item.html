@@ -5,28 +5,19 @@
 	</label>
 </div>
 
-	
 <ion-content class="todolist">	
-	<ion-list>	
-		
-		<ion-item ng-repeat="model in collection.models | instancesMeFilter:searchInstances | instancesFilter:searchInstances | orderBy:'-createdAt'">
-
-		<div class="row">
-			<div class="col">
-				<a class="icon-circle activitiIcon" ng-click="opendiagram(model)">
-          			<i class="ion-ios-people"></i>
-          		</a>
-				
-			</div>
-			<div class="col col-80" >
-				<h2>{{model.name}}</h2>
-				<p>{{model.nextHandler}}, {{model.createTime | date: 'dd-MM-yyyy'}}
-			  	</p>
-			</div>
-		</div>
-	
-		</ion-item>
-	</ion-list>
-	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
-	</ion-infinite-scroll>
-</ion-content>
+  <ion-list >
+	<ion-item 
+	ng-repeat="model in collection.models | instancesMeFilter:searchInstances | instancesFilter:searchInstances | orderBy:'-createdAt'" 
+	ng-click="opendiagram(model)"
+	item="item" class="item-avatar">
+          
+		<i class="item-image icon-circle activitiIcon ion-ios-people"></i>
+		<h2>{{model.name}}</h2>
+		<p>{{model.nextHandler}}, {{model.createTime | date: 'dd-MM-yyyy'}}</p>
+			
+	</ion-item>
+  </ion-list>
+  <ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
+  </ion-infinite-scroll>
+</ion-content>	
