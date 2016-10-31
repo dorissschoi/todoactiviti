@@ -54,8 +54,23 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						$scope.$broadcast('scroll.infiniteScrollComplete')
 					.catch alert			
 			
-	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, progress, $ionicPopup, resources, $ionicModal, $ionicListDelegate) ->
+	.controller 'ListCtrl', ($rootScope, $stateParams, $scope, collection, $location, ownedBy, sortBy, progress, $ionicPopup, resources, $ionicModal, $ionicListDelegate, popover) ->
+		_.extend popover.scope,
+			create: ->
+				$location.url "/todo/create"
+				popover.hide()
+			
+			listbyDate: ->
+				$location.url "/todo/weekList?progress=0&ownedBy=me&sort=createdAt"
+				popover.hide()
+			
+			listbyProject: ->
+				$location.url "/todo/weekList?progress=0&ownedBy=me&sort=project"
+				popover.hide()	
+				
 		_.extend $scope,
+			popover: popover
+			
 			progress: progress
 			
 			ownedBy: ownedBy
@@ -88,7 +103,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 					.catch (err) ->
 						alert err
 						collection.$refetch({params: {progress: progress, ownedBy: ownedBy, sort: sortBy }})								
-			
+					
 			edit: (item) ->
 				$location.url "/todo/edit/#{item.id}"		
 				

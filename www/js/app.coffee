@@ -92,6 +92,10 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					ret = new resources.TodoList()
 					ret.$fetch({params: {progress: progress, ownedBy: ownedBy, sort: sortBy}})
 		
+				popover: ($ionicPopover) ->
+					$ionicPopover
+						.fromTemplateUrl 'templates/todo/popover.html'
+		
 		$stateProvider.state 'app.listProcessdef',
 			url: "/todo/processdefList"
 			cache: false

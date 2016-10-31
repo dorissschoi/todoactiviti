@@ -1,0 +1,15 @@
+<ion-popover-view class="fit">
+  <ion-content scroll="false">
+    <div class='list'>
+      <a class='item item-icon-left' ng-click='create()'>
+        <i class='icon ion-plus-round'></i>{{'addtask' | translate}}
+      </a>
+      <a class='item item-icon-left' ng-click='listbyDate()'>
+        <i class='icon ion-calendar'></i>{{'orderbyDate' | translate}}
+      </a>
+      <a class='item item-icon-left' ng-click='listbyProject()'>
+        <i class='icon ion-folder'></i>{{'orderbyProj' | translate}}
+      </a>      
+    </div>
+  </ion-content>
+</ion-popover-view>
