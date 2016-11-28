@@ -133,8 +133,8 @@ input.todoCheckbox {
 }
 /* activiti diagram zoom */
 .zoom-pane {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .zoom-pane .scroll {
@@ -171,6 +171,6 @@ input.todoCheckbox {
 }
 
 .zoom-pane img {
-  width: 60%;
-  vertical-align: middle;
+  width: 100% !important;
+  vertical-align: middle !important;
 }

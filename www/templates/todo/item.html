@@ -25,7 +25,7 @@
 		class="item-image icon-circle activitiIcon ion-ios-people"></i>
 		      	
 		<h2><span  ng-if="model.project != null">{{model.project}} - </span>{{model.task}}</h2>
-        <p>{{model.ownedBy.username}}<span  ng-if="model.createdAt != null">,</span> {{model.createdAt | date: 'dd.MM.yyyy HH:mm' }}</p>
+        <p>{{model.ownedBy.username}}<span  ng-if="model.createdAt != null">,</span> {{model.createdAt | date: 'dd-MM-yyyy HH:mm' }}</p>
 		</div>	
 		<ion-option-button ng-if="model.type!==undefined && model.type != 'manual' && model.progress < 100" class="button button-balanced icon-left ion-checkmark" on-tap="$event.stopPropagation(); completeTask(model);">{{'complete' | translate}}</ion-option-button>
 		<ion-option-button ng-if="model.type==undefined || model.type!==undefined && model.type == 'manual'" class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); edit(model);">{{'edit' | translate}}</ion-option-button>

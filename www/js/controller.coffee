@@ -47,7 +47,10 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						src = new Buffer(data).toString('base64')
 						src = "data:image/png;base64,#{src}"
 						$scope.$emit 'activitiImg', src 
-				
+			
+			detail: (item) ->
+				$location.url "/workflowtask/#{item.id}"
+							
 			loadMore: ->
 				collection.$fetch()
 					.then ->
@@ -130,6 +133,10 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		$scope.$on 'selectuser', (event, item) ->
 			$scope.model.ownedBy = item
 
+	.controller 'TaskCtrl', ($rootScope, $scope, $location, collection, resources) ->
+		_.extend $scope,
+			collection: collection
+			resources: resources
 
 	.filter 'definitionsFilter', ($ionicScrollDelegate)->
 		(collection, search) ->

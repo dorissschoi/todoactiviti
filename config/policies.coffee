@@ -23,4 +23,8 @@ module.exports =
 			'*':		false
 			find:		['isAuth']
 			findOne:	['isAuth']		
-			getDiagram:	true	
+			getDiagram:	true
+		WorkflowTaskController:
+			'*':		false
+			find:		['isAuth']
+			findOne:	['isAuth']				

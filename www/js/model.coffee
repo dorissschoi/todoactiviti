@@ -70,6 +70,17 @@ angular.module 'starter.model', ['PageableAR']
 			model: Processins
 		
 			$urlRoot: "api/processins"	
+			
+		class WorkflowTask extends pageableAR.Model
+			$idAttribute: 'id'
+			
+			$urlRoot: "api/workflowtask"
+		
+		# WorkflowTaskList
+		class WorkflowTaskList extends pageableAR.PageableCollection
+			model: WorkflowTask
+		
+			$urlRoot: "api/workflowtask"				
 											
 		Todo:		Todo
 		TodoList:	TodoList
@@ -79,4 +90,6 @@ angular.module 'starter.model', ['PageableAR']
 		ProcessdefList: ProcessdefList
 		Processins: Processins
 		ProcessinsList: ProcessinsList
+		WorkflowTask: WorkflowTask
+		WorkflowTaskList: WorkflowTaskList
 		
