@@ -3,7 +3,7 @@
  # @description :: Server-side logic for managing todoes
  # @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
 actionUtil = require 'sails/lib/hooks/blueprints/actionUtil'
-activiticlient = require 'activiti-client'
+
 
 module.exports =
 	
@@ -18,7 +18,10 @@ module.exports =
 		if parseInt(req.body.progress) == 100
 			values.progress = parseInt(req.body.progress) 
 		if values.progress == 100 && req.body.type != 'manual'
-			activiti.completeTask req.body.taskId, req.user
+			data =
+				action: 'complete'
+				variables: [{name: 'completedBy', value: req.user}]
+			activiti.instance.update req.body.taskId, data
 		
 		Model.update(pk, values)
 			.then (updatedRecord) ->
@@ -36,7 +39,10 @@ module.exports =
 			.findOne(pk)
 			.populateAll()
 			.then (todo) ->
-				activiticlient.instance.completeTask todo.taskId, req.user
+				data =
+					action: 'complete'
+					variables: [{name: 'completedBy', value: req.user}]
+				activiti.instance.update todo.taskId, data
 			.then (rst) ->
 				sails.models.todo.update(pk, {progress: 100})
 			.then (updatedRecord) ->
@@ -52,7 +58,7 @@ module.exports =
 			.populateAll()
 			.then (result) ->
 				if result.type == 'activiti'
-					activiticlient.instance.delete result.procInsId
+					activiti.instance.delete result.procInsId
 					Model.destroy({procInsId: result.procInsId})
 				else	
 					Model.destroy(pk)
