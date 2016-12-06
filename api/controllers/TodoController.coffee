@@ -21,7 +21,7 @@ module.exports =
 			data =
 				action: 'complete'
 				variables: [{name: 'completedBy', value: req.user}]
-			activiti.instance.update req.body.taskId, data
+			activiti.task.update req.body.taskId, data
 		
 		Model.update(pk, values)
 			.then (updatedRecord) ->
@@ -34,7 +34,16 @@ module.exports =
 		values = actionUtil.parseValues req
 		
 		sails.log.info "completeActiviti: #{JSON.stringify values}"
-		
+		###
+		sails.log.info "completeActiviti req.body: #{JSON.stringify req.body}"
+		taskvar =_.keys(req.body)
+		sails.log.info "completeActiviti taskvar1: #{JSON.stringify taskvar}"
+		taskvar =_.values(req.body)
+		sails.log.info "completeActiviti taskvar2: #{JSON.stringify taskvar}"
+				
+		taskvar.push({name: 'completedBy', value: req.user})
+		sails.log.info "completeActiviti var : #{JSON.stringify taskvar}"
+		###
 		sails.models.todo
 			.findOne(pk)
 			.populateAll()
@@ -42,7 +51,7 @@ module.exports =
 				data =
 					action: 'complete'
 					variables: [{name: 'completedBy', value: req.user}]
-				activiti.instance.update todo.taskId, data
+				activiti.task.update todo.taskId, data
 			.then (rst) ->
 				sails.models.todo.update(pk, {progress: 100})
 			.then (updatedRecord) ->

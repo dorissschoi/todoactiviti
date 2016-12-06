@@ -13,7 +13,7 @@ module.exports =
 		
 	getDiagram: (req, res) ->
 		data = actionUtil.parseValues(req)
-		activiti.definition.getDiagram data.deploymentId
+		activiti.definition.diagram data.deploymentId
 			.then (stream) ->
 				res.ok stream
 			.catch res.serverError
