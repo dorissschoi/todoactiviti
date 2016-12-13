@@ -5,7 +5,7 @@ actionUtil = require 'sails/lib/hooks/blueprints/actionUtil'
 module.exports =
 	find: (req, res) ->
 		data = actionUtil.parseValues(req)
-		activiti.instance.list req.user, data.skip  
+		activiti.instance.listUser req.user, data.skip  
 			.then (result) ->
 				res.ok(result)
 			.catch res.serverError
