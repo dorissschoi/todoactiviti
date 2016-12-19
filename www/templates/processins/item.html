@@ -8,13 +8,13 @@
 <ion-content class="todolist">	
   <ion-list >
 	<ion-item 
-	ng-repeat="model in collection.models | instancesMeFilter:searchInstances | instancesFilter:searchInstances | orderBy:'-createdAt'" 
+	ng-repeat="model in collection.models | instancesFilter:searchInstances | orderBy:'-createdAt'" 
 	ng-click="opendiagram(model)"
 	item="item" class="item-avatar">
           
 		<i class="item-image icon-circle activitiIcon ion-ios-people"></i>
 		<h2>{{model.name}}</h2>
-		<p>{{model.nextHandler}}, {{model.createTime | date: 'dd-MM-yyyy'}}</p>
+		<p>{{model.startTime | date: 'dd-MMM HH:mm'}}<span ng-if="model.endTime!==null">, {{model.endTime | date: 'dd-MMM HH:mm'}}</span></p>
 
 		<ion-option-button class="button button-balanced icon-left ion-android-more-horizontal" on-tap="$event.stopPropagation(); detail(model);">Detail</ion-option-button>	
 	</ion-item>

@@ -7,9 +7,9 @@
           
 		<i class="item-image icon-circle activitiIcon ion-ios-people"></i>
 		<h2>{{model.name}}
-			<span ng-if="model.deleteReason!==null">({{model.deleteReason}})</span></h2>
-		<p>{{model.startTime | date: 'dd-MM-yyyy HH:mm'}} 
-			<span ng-if="model.endTime!==null">- {{model.endTime | date: 'dd-MM-yyyy HH:mm'}}</span></p>
+			<span ng-if="model.owner.value!==null">({{model.owner.value}})</span></h2>
+		<p>{{model.startTime | date: 'dd-MMM HH:mm'}} 
+			<span ng-if="model.endTime!==null">- {{model.endTime | date: 'dd-MMM HH:mm'}}</span></p>
 
 	
 	</ion-item>

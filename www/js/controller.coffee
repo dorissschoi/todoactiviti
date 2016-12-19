@@ -41,7 +41,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			collection: collection
 			
 			opendiagram: (item) ->
-				piModel = new resources.Processins id: item.id
+				piModel = new resources.Processins id: item.processInstanceId
 				piModel.$fetch()
 					.then (data)->
 						src = new Buffer(data).toString('base64')
@@ -49,7 +49,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						$scope.$emit 'activitiImg', src 
 			
 			detail: (item) ->
-				$location.url "/workflowtask/#{item.id}"
+				$location.url "/workflowtask/#{item.processInstanceId}"
 							
 			loadMore: ->
 				collection.$fetch()
@@ -147,11 +147,6 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			else
 				return collection
 
-	.filter 'instancesMeFilter', ($ionicScrollDelegate)->
-		(collection, search) ->
-				return _.filter collection, (item) ->
-					item.includeMe 
-								
 	.filter 'instancesFilter', ($ionicScrollDelegate)->
 		(collection, search) ->
 			if search
