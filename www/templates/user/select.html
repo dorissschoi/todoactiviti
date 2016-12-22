@@ -30,7 +30,7 @@
 	
 	          <!-- Single select -->
 	          <label
-	                 ng-repeat="item in model.models"
+	                 ng-repeat="item in model.models  | UserSearchFilter:searchText"
 	                 ng-if="!multiple"
 	                 ng-click="select(item); $emit('selectuser',item)"
 	                 class="item item-text-wrap">

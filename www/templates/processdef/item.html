@@ -7,7 +7,7 @@
 	
 <ion-content class="todolist">	
   <ion-list >
-	<ion-item 
+	<ion-item ng-if="!model.suspended" 
 	ng-repeat="model in collection.models | definitionsFilter:searchDefinitions | orderBy:['name','-version']" 
 	ng-click="opendiagram(model)"
 	item="item" class="item-avatar">

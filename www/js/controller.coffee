@@ -170,6 +170,6 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			if search
 				return _.filter collection, (item) ->
 					r = new RegExp(search, 'i')
-					r.test(item.username()) 
+					r.test(item.username) 
 			else
 				return collection
