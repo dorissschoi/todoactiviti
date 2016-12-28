@@ -8,7 +8,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		$scope.env = env
 		$scope.navigator = navigator
 
-	.controller 'ListProcessdefCtrl', ($scope, collection, resources, $location, $ionicModal) ->				
+	.controller 'ListBusinessProcessCtrl', ($scope, collection, resources, $location, $ionicModal) ->				
 		_.extend $scope,
 			
 			collection: collection

@@ -4,8 +4,8 @@ module.exports =
 			controller:		'ProcessinsController'
 			action:			'getDiagram'
 
-		'GET /api/processdef/:deploymentId':
-			controller:		'ProcessdefController'
+		'GET /api/businessProcess/:deploymentId':
+			controller:		'BusinessProcessController'
 			action:			'getDiagram'
 		
 		'PUT /api/todo/:id/complete':

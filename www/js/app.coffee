@@ -113,16 +113,16 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 						.fromTemplateUrl 'templates/todo/popover.html'
 		
 		$stateProvider.state 'app.listProcessdef',
-			url: "/todo/processdefList"
+			url: "/todo/businessProcessList"
 			cache: false
 			views:
 				'menuContent':
-					templateUrl: "templates/processdef/list.html"
-					controller: 'ListProcessdefCtrl'
+					templateUrl: "templates/businessProcess/list.html"
+					controller: 'ListBusinessProcessCtrl'
 			resolve:
 				resources: 'resources'
 				collection: (resources) ->
-					ret = new resources.ProcessdefList()
+					ret = new resources.BusinessProcessList()
 					ret.$fetch()
 
 		$stateProvider.state 'app.listProcessins',
