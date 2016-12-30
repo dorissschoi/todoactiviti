@@ -16,13 +16,13 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			# save model backend call post
 			startProcess: (item) ->
 				process = new resources.Processins
-					processdefID: item.id
+					processdefID: item.definition.id
 				process.$save()
 					.then () ->
 						$location.url "/todo/weekList?progress=0&ownedBy=me&sort=createdAt"
 									
 			opendiagram: (item) ->
-				pdModel = new resources.Processdef id: item.deploymentId
+				pdModel = new resources.BusinessProcess id: item.deploymentId
 				pdModel.$fetch()
 					.then (data)->
 						src = new Buffer(data).toString('base64')

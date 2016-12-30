@@ -112,7 +112,7 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					$ionicPopover
 						.fromTemplateUrl 'templates/todo/popover.html'
 		
-		$stateProvider.state 'app.listProcessdef',
+		$stateProvider.state 'app.listbusinessProcess',
 			url: "/todo/businessProcessList"
 			cache: false
 			views:
