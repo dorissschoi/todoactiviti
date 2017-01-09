@@ -123,8 +123,10 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		_.extend $scope,
 			model: model
 			userlist: userlist
-			selected: _.findWhere(userlist.models,{username: me.username})
+			selected: ''
 			save: ->
+				if _.isUndefined $scope.model.ownedBy
+					$scope.model.ownedBy = me.username
 				$scope.model.$save()
 					.then ->
 						$location.url "/todo/weekList?progress=0&ownedBy=me&sort=createdAt"
