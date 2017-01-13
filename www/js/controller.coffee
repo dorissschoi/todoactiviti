@@ -143,9 +143,12 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 	.filter 'definitionsFilter', ($ionicScrollDelegate)->
 		(collection, search) ->
 			if search
-				return _.filter collection, (item) ->
+				deflist = _.filter collection, (item) ->
+					!_.isUndefined(item.definition)
+					
+				return _.filter deflist, (item) ->
 					r = new RegExp(search, 'i')
-					r.test(item.name)
+					r.test(item.definition.name)
 			else
 				return collection
 
